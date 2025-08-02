@@ -1,8 +1,13 @@
 // app/kontak/page.tsx
+"use client";
+import { motion } from "framer-motion";
 
 export default function KontakPage() {
   return (
-    <main className="max-w-2xl mx-auto px-4 py-10 space-y-8">
+    <motion.main initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      className="max-w-4xl mx-auto px-4 py-10 space-y-8">
       <h1 className="text-3xl font-bold text-blue-700 text-center">
         Hubungi Kami
       </h1>
@@ -47,6 +52,6 @@ export default function KontakPage() {
           loading="lazy"
         ></iframe>
       </section>
-    </main>
+    </motion.main>
   );
 }

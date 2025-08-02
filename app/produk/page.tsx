@@ -1,3 +1,6 @@
+
+"use client";
+import { motion } from "framer-motion";
 import Image from "next/image";
 
 type Produk = {
@@ -41,14 +44,20 @@ const produkList: Produk[] = [
 
 export default function ProdukPage() {
   return (
-    <main className="max-w-5xl mx-auto px-4 py-10 space-y-8">
+    <motion.main initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      className="max-w-4xl mx-auto px-4 py-10 space-y-8" >
+
       <h1 className="text-3xl font-bold text-blue-700 text-center">
         Produk Unggulan Kami
       </h1>
 
       <div className="grid md:grid-cols-2 gap-6">
         {produkList.map((produk) => (
-          <div key={produk.nama} className="bg-white border rounded-lg shadow-md overflow-hidden">
+          <div
+            key={produk.nama}
+            className="bg-white border rounded-lg shadow-md overflow-hidden hover:shadow-lg hover:scale-[1.02] transition-transform duration-300">
             <Image
               src={produk.gambar}
               alt={produk.nama}
@@ -63,6 +72,6 @@ export default function ProdukPage() {
           </div>
         ))}
       </div>
-    </main>
+    </motion.main>
   );
 }

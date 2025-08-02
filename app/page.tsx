@@ -53,14 +53,15 @@ export default function HomePage() {
         </motion.p>
 
         <motion.a
-          href="#kontak"
-          className="inline-block mt-4 bg-blue-700 text-white px-6 py-3 rounded-full hover:bg-blue-800 transition"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8 }}
-        >
-          Hubungi Kami
-        </motion.a>
+  href="#kontak"
+  className="inline-block mt-4 bg-blue-700 text-white px-6 py-3 rounded-full shadow-md hover:bg-blue-800 hover:scale-105 transition-all duration-300"
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ delay: 0.8 }}
+>
+  Hubungi Kami
+</motion.a>
+
       </motion.section>
     </main>
   );
