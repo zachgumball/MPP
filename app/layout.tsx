@@ -12,6 +12,9 @@ const poppins = Poppins({
 export const metadata = {
   title: "PT. Mandala Putra Persada",
   description: "Company Profile PT. Mandala Putra Persada",
+  icons: {
+    icon: "/mpp.png",
+  },
 };
 
 export default function RootLayout({

@@ -12,12 +12,12 @@ export default function HomePage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        <div className="rounded-lg overflow-hidden">
+        <div className="rounded-lg overflow-hidden max-w-xs mx-auto">
           <Image
-            src="/hero.jpeg"
+            src="/hero.png"
             alt="PT Mandala Putra Persada"
-            width={800}
-            height={400}
+            width={250}
+            height={250}
             className="w-full h-auto object-cover"
             priority
           />
