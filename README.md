@@ -1,4 +1,5 @@
 🏗️ PT. Mandala Putra Persada - Company Profile Website
+
 Website resmi untuk PT. Mandala Putra Persada, sebuah perusahaan penyedia material konstruksi seperti batu belah, split, abu batu, pasir, screening, dan tanah urug. Website ini dirancang untuk menampilkan profil perusahaan, visi & misi, daftar produk, serta informasi kontak yang mudah diakses.
 
 🔧 Teknologi yang Digunakan
