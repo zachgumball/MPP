@@ -4,29 +4,28 @@ Website resmi untuk PT. Mandala Putra Persada, sebuah perusahaan penyedia materi
 🔧 Teknologi yang Digunakan
 Next.js – React Framework
 
-Tailwind CSS – Utility-first CSS framework
+- Tailwind CSS – Utility-first CSS framework
 
-TypeScript
+- TypeScript
 
-Framer Motion – Animasi UI
+- Framer Motion – Animasi UI
 
-Hosting oleh Vercel
+- Hosting oleh Vercel
 
 📱 Fitur Utama
 Tampilan responsif (mobile-first)
 
 Halaman:
 
-Beranda
+- Beranda
 
-Tentang Perusahaan (Sejarah, Visi & Misi)
+- Tentang Perusahaan (Sejarah, Visi & Misi)
 
-Daftar Produk Material
+- Daftar Produk Material
 
-Kontak & Lokasi
+- Kontak & Lokasi
 
-
-Desain modern, ringan, dan cepat
+- Desain modern, ringan, dan cepat
 
 🔗 Live Demo
-https://namaproject.vercel.app 
+https://mandalapersada.vercel.app 
