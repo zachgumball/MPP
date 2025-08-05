@@ -112,7 +112,13 @@ export default function HomePage() {
           },
           {
             icon: (
-              <svg width="36" height="36" fill="none" viewBox="0 0 24 24" className="text-pink-600"><path d="M12 2v20M2 12h20" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg>
+              // Ganti icon menjadi headset/microphone
+              <svg width="36" height="36" fill="none" viewBox="0 0 24 24" className="text-pink-600">
+                <path d="M4 17v-3a8 8 0 0116 0v3" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                <rect x="6" y="17" width="3" height="4" rx="1.5" stroke="currentColor" strokeWidth="2"/>
+                <rect x="15" y="17" width="3" height="4" rx="1.5" stroke="currentColor" strokeWidth="2"/>
+                <path d="M12 21v-2" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+              </svg>
             ),
             title: "Konsultasi Proyek",
             desc: "Tim ahli siap membantu solusi material sesuai kebutuhan Anda.",
