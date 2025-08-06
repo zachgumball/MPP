@@ -112,12 +112,15 @@ export default function HomePage() {
           },
           {
             icon: (
-              // Ganti icon menjadi headset/microphone
+              // Icon headset customer care (lebih jelas: lingkaran, headband, mic)
               <svg width="36" height="36" fill="none" viewBox="0 0 24 24" className="text-pink-600">
-                <path d="M4 17v-3a8 8 0 0116 0v3" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                <rect x="6" y="17" width="3" height="4" rx="1.5" stroke="currentColor" strokeWidth="2"/>
-                <rect x="15" y="17" width="3" height="4" rx="1.5" stroke="currentColor" strokeWidth="2"/>
+                <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>
+                <path d="M7 17v-3a5 5 0 0110 0v3" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                <rect x="5" y="17" width="3" height="4" rx="1.5" stroke="currentColor" strokeWidth="2"/>
+                <rect x="16" y="17" width="3" height="4" rx="1.5" stroke="currentColor" strokeWidth="2"/>
                 <path d="M12 21v-2" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                <circle cx="19" cy="20" r="1" fill="currentColor"/>
+                <path d="M19 20c0-1-2-1-2 0" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
               </svg>
             ),
             title: "Konsultasi Proyek",
