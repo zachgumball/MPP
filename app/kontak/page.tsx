@@ -33,7 +33,7 @@ export default function KontakPage() {
         <div>
           <h2 className="text-lg font-semibold">Website</h2>
           <a
-            href="http://mandalapersada.vercel.app"
+            href="https://mandalapersada.vercel.app"
             target="_blank"
             rel="noopener noreferrer"
             className="text-blue-700 hover:underline"

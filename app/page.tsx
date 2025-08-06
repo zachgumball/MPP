@@ -121,7 +121,7 @@ export default function HomePage() {
                 <path d="M12 21v-2" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
                 <circle cx="19" cy="20" r="1" fill="currentColor"/>
                 <path d="M19 20c0-1-2-1-2 0" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-              </svg>
+              </svg>            // Icon headset customer care (lebih jelas: lingkaran, headband, mic)
             ),
             title: "Konsultasi Proyek",
             desc: "Tim ahli siap membantu solusi material sesuai kebutuhan Anda.",
