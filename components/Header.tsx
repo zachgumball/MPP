@@ -30,7 +30,7 @@ export default function Header() {
               priority
             />
           </div>
-          <span className="text-white font-bold text-lg hidden sm:inline">MPP</span>
+          <span className="text-white font-bold text-lg hidden sm:inline">Mandala Putra Persada</span>
         </Link>
 
         {/* Desktop Menu */}
