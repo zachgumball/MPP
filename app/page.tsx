@@ -2,147 +2,379 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function HomePage() {
-  return (
-    <main className="relative min-h-screen bg-white text-gray-900 px-4 py-10 md:px-12 overflow-hidden">
-      {/* Futuristic animated background */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        {/* Gradient blobs */}
-        <div className="absolute top-[-80px] left-[-80px] w-[300px] h-[300px] bg-gradient-to-tr from-blue-400 via-blue-200 to-purple-300 opacity-40 rounded-full blur-3xl animate-blob1" />
-        <div className="absolute bottom-[-100px] right-[-100px] w-[350px] h-[350px] bg-gradient-to-br from-purple-400 via-pink-300 to-blue-300 opacity-40 rounded-full blur-3xl animate-blob2" />
-        {/* Animated grid lines */}
-        <svg className="absolute inset-0 w-full h-full opacity-10 animate-pulse-slow" width="100%" height="100%">
-          <defs>
-            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#3b82f6" strokeWidth="0.5"/>
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#grid)" />
+  const features = [
+    {
+      id: 1,
+      icon: (
+        <svg className="w-12 h-12 text-cyan-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
-        {/* Decorative floating dots */}
-        <div className="absolute left-10 top-1/2 w-3 h-3 bg-blue-400 rounded-full opacity-30 animate-float" />
-        <div className="absolute right-16 bottom-24 w-2 h-2 bg-pink-400 rounded-full opacity-40 animate-float2" />
-      </div>
+      ),
+      title: "Material Berkualitas Premium",
+      description: "Semua material telah melewati quality check ketat sesuai standar nasional dan internasional.",
+    },
+    {
+      id: 2,
+      icon: (
+        <svg className="w-12 h-12 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
+      ),
+      title: "Pengiriman Cepat & Tepat",
+      description: "Armada profesional siap mengantarkan material Anda ke lokasi proyek dengan aman dan tepat waktu.",
+    },
+    {
+      id: 3,
+      icon: (
+        <svg className="w-12 h-12 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
+        </svg>
+      ),
+      title: "Konsultasi Teknis Gratis",
+      description: "Tim ahli kami siap memberikan solusi terbaik sesuai spesifikasi dan kebutuhan proyek Anda.",
+    },
+  ];
 
-      <motion.section
-        className="max-w-2xl mx-auto text-center space-y-6"
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        {/* Logo dengan efek shine */}
-        <div className="relative max-w-xs mx-auto overflow-hidden">
-          <Image
-            src="/hero.png"
-            alt="PT Mandala Putra Persada"
-            width={250}
-            height={250}
-            className="w-full h-auto object-cover"
-            priority
-          />
-          {/* Shine animation */}
-          <span className="pointer-events-none absolute inset-0 block animate-shine" />
+  const stats = [
+    { number: "500+", label: "Proyek Selesai" },
+    { number: "1000+", label: "Klien Puas" },
+    { number: "15+", label: "Tahun Berpengalaman" },
+  ];
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.3,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8 },
+    },
+  };
+
+  return (
+    <main className="overflow-hidden bg-white">
+      {/* Hero Section */}
+      <section className="relative pt-20 pb-32 md:pt-32 md:pb-48 px-4 md:px-6">
+        {/* Background decorations */}
+        <div className="absolute inset-0 -z-10 overflow-hidden">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-cyan-200 via-blue-200 to-purple-200 rounded-full blur-3xl opacity-30 animate-blob" />
+          <div className="absolute bottom-0 left-0 w-72 h-72 bg-gradient-to-tr from-blue-200 to-cyan-200 rounded-full blur-3xl opacity-20 animate-blob" style={{ animationDelay: "2s" }} />
         </div>
 
-        <motion.p
-          className="text-lg font-semibold text-gray-700 italic"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
-        >
-          “Mitra Terpercaya dalam Konstruksi dan Solusi Usaha”
-        </motion.p>
-
-        {/* Deskripsi singkat */}
-        <motion.p
-          className="text-gray-700 text-sm md:text-base leading-relaxed"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6 }}
-        >
-          Kami adalah perusahaan penyedia material konstruksi seperti batu, pasir, tanah urug, dan paving block yang berkomitmen mendukung pembangunan infrastruktur nasional secara berkelanjutan. 
-          <br className="hidden md:block" />
-          <span className="inline-block mt-2 text-blue-600 font-medium">
-            Layanan kami meliputi pengadaan, pengiriman, dan konsultasi material untuk proyek Anda.
-          </span>
-        </motion.p>
-
-        {/* Tombol aksi */}
-        <motion.a
-          href="#kontak"
-          className="inline-block mt-4 bg-gradient-to-r from-blue-700 via-purple-600 to-pink-500 text-white px-8 py-3 rounded-full shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-300 font-semibold tracking-wide"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8 }}
-        >
-          Hubungi Kami
-        </motion.a>
-      </motion.section>
-
-      {/* Section keunggulan */}
-      <motion.section
-        className="max-w-3xl mx-auto mt-14 grid md:grid-cols-3 gap-6"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={{
-          hidden: {},
-          visible: { transition: { staggerChildren: 0.15 } },
-        }}
-      >
-        {[
-          {
-            icon: (
-              <svg width="36" height="36" fill="none" viewBox="0 0 24 24" className="text-blue-600"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/><path d="M8 12l2 2 4-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-            ),
-            title: "Material Berkualitas",
-            desc: "Hanya menyediakan material terbaik sesuai standar proyek nasional.",
-          },
-          {
-            // Ganti icon menjadi jam
-            icon: (
-              <svg width="36" height="36" fill="none" viewBox="0 0 24 24" className="text-purple-600">
-                <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>
-                <path d="M12 7v5l3 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            ),
-            title: "Pengiriman Tepat Waktu",
-            desc: "Didukung armada profesional dan sistem distribusi efisien.",
-          },
-          {
-            icon: (
-              // Icon headset customer care (lebih jelas: lingkaran, headband, mic)
-              <svg width="36" height="36" fill="none" viewBox="0 0 24 24" className="text-pink-600">
-                <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>
-                <path d="M7 17v-3a5 5 0 0110 0v3" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                <rect x="5" y="17" width="3" height="4" rx="1.5" stroke="currentColor" strokeWidth="2"/>
-                <rect x="16" y="17" width="3" height="4" rx="1.5" stroke="currentColor" strokeWidth="2"/>
-                <path d="M12 21v-2" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-                <circle cx="19" cy="20" r="1" fill="currentColor"/>
-                <path d="M19 20c0-1-2-1-2 0" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
-              </svg>            // Icon headset customer care (lebih jelas: lingkaran, headband, mic)
-            ),
-            title: "Konsultasi Proyek",
-            desc: "Tim ahli siap membantu solusi material sesuai kebutuhan Anda.",
-          },
-        ].map((item, i) => (
+        <div className="max-w-6xl mx-auto">
           <motion.div
-            key={item.title}
-            className="bg-white/80 rounded-2xl shadow-md p-6 flex flex-col items-center text-center border-t-4"
-            style={{
-              borderColor: ["#3b82f6", "#a78bfa", "#f472b6"][i],
-            }}
+            className="text-center"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            {/* Logo Badge */}
+            <motion.div
+              className="inline-flex items-center gap-2 bg-cyan-100 text-cyan-700 px-4 py-2 rounded-full font-semibold text-sm mb-6"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.2 }}
+            >
+              <span className="w-2 h-2 bg-cyan-500 rounded-full animate-pulse" />
+              Solusi Material Konstruksi Terpercaya
+            </motion.div>
+
+            {/* Main Heading */}
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+              <span className="block mb-2">PT. Mandala Putra</span>
+              <span className="gradient-text">Persada</span>
+            </h1>
+
+            {/* Tagline */}
+            <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
+              Kami menyediakan material konstruksi berkualitas tinggi dengan layanan profesional untuk mendukung kesuksesan setiap proyek Anda.
+            </p>
+
+            {/* CTA Buttons */}
+            <motion.div
+              className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+            >
+              <Link href="/produk" className="btn-primary">
+                Lihat Produk Kami
+              </Link>
+              <Link href="/kontak" className="btn-secondary">
+                Hubungi Tim Kami
+              </Link>
+            </motion.div>
+
+            {/* Hero Image */}
+            <motion.div
+              className="relative max-w-2xl mx-auto"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.6, duration: 0.8 }}
+            >
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+                <Image
+                  src="/hero.png"
+                  alt="PT Mandala Putra Persada"
+                  width={500}
+                  height={400}
+                  className="w-full h-auto object-cover"
+                  priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl" />
+              </div>
+              <div className="absolute -inset-4 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 rounded-2xl blur-2xl opacity-20 -z-10 animate-glow-pulse" />
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="py-16 px-4 md:px-6 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+          >
+            {stats.map((stat, idx) => (
+              <motion.div
+                key={idx}
+                className="text-center"
+                variants={itemVariants}
+              >
+                <div className="text-4xl md:text-5xl font-bold text-cyan-400 mb-2">
+                  {stat.number}
+                </div>
+                <p className="text-gray-300 text-lg">{stat.label}</p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-20 px-4 md:px-6">
+        <div className="max-w-6xl mx-auto">
+          {/* Section Header */}
+          <motion.div
+            className="text-center mb-16"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 + i * 0.1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
           >
-            <div className="mb-2">{item.icon}</div>
-            <div className="font-bold text-blue-700 mb-1">{item.title}</div>
-            <div className="text-gray-600 text-sm">{item.desc}</div>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Keunggulan Kami</h2>
+            <div className="w-16 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full mx-auto mb-4" />
+            <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+              Kami berkomitmen memberikan layanan terbaik dengan produk berkualitas tinggi
+            </p>
           </motion.div>
-        ))}
-      </motion.section>
+
+          {/* Features Grid */}
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+          >
+            {features.map((feature) => (
+              <motion.div
+                key={feature.id}
+                className="p-8 rounded-2xl bg-gradient-to-br from-slate-50 to-white border border-slate-200 card-hover group"
+                variants={itemVariants}
+              >
+                {/* Icon Background */}
+                <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-cyan-100 to-blue-100 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  {feature.icon}
+                </div>
+
+                {/* Content */}
+                <h3 className="text-xl font-bold text-slate-900 mb-3">
+                  {feature.title}
+                </h3>
+                <p className="text-gray-600 leading-relaxed">
+                  {feature.description}
+                </p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-20 px-4 md:px-6 bg-gradient-to-b from-slate-50 to-white">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Testimoni Klien Kami</h2>
+            <div className="w-16 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full mx-auto mb-4" />
+            <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+              Kepuasan klien adalah prioritas utama kami, dan kami bangga dengan reputasi yang telah dibangun
+            </p>
+          </motion.div>
+
+          <motion.div
+            className="grid md:grid-cols-3 gap-8"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+          >
+            {[
+              {
+                name: "PT. Sinar Konstruksi",
+                role: "Project Manager",
+                content: "Layanan PT. Mandala Putra Persada sangat profesional. Material berkualitas tinggi dan pengiriman selalu tepat waktu.",
+                rating: 5,
+              },
+              {
+                name: "CV. Bangunan Jaya",
+                role: "Direktur Operasional",
+                content: "Sudah bekerja sama selama 8 tahun. Konsistensi kualitas dan pelayanan yang luar biasa membuat kami terus mempercayai mereka.",
+                rating: 5,
+              },
+              {
+                name: "PT. Infrastruktur Indonesia",
+                role: "Procurement Officer",
+                content: "Harga yang kompetitif dan dukungan teknis yang excellent membuat pekerjaan proyek kami menjadi lebih efisien.",
+                rating: 5,
+              },
+            ].map((testimonial, idx) => (
+              <motion.div
+                key={idx}
+                className="p-8 bg-white rounded-2xl shadow-lg border border-gray-200 card-hover"
+                variants={itemVariants}
+              >
+                <div className="flex gap-1 mb-4">
+                  {Array(testimonial.rating)
+                    .fill(0)
+                    .map((_, i) => (
+                      <span key={i} className="text-yellow-400 text-xl">
+                        ★
+                      </span>
+                    ))}
+                </div>
+                <p className="text-gray-700 mb-6 leading-relaxed italic">
+                  "{testimonial.content}"
+                </p>
+                <div className="border-t pt-4">
+                  <h4 className="font-bold text-slate-900">{testimonial.name}</h4>
+                  <p className="text-sm text-cyan-600">{testimonial.role}</p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Team Section */}
+      <section className="py-20 px-4 md:px-6 bg-gradient-to-b from-white to-slate-50">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Tim Profesional Kami</h2>
+            <div className="w-16 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full mx-auto mb-4" />
+            <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+              Tim berpengalaman dan berdedikasi siap memberikan solusi terbaik untuk kebutuhan Anda
+            </p>
+          </motion.div>
+
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+          >
+            {[
+              {
+                name: "Budi Santoso",
+                role: "Direktur Utama",
+                icon: "👔",
+              },
+              {
+                name: "Siti Nurhaliza",
+                role: "Manager Operasional",
+                icon: "💼",
+              },
+              {
+                name: "Roni Suryanto",
+                role: "Kepala Distribusi",
+                icon: "🚚",
+              },
+              {
+                name: "Dewi Lestari",
+                role: "Customer Service",
+                icon: "📞",
+              },
+            ].map((team, idx) => (
+              <motion.div
+                key={idx}
+                className="p-8 bg-white rounded-2xl shadow-lg border border-gray-200 text-center card-hover group"
+                variants={itemVariants}
+              >
+                <div className="text-5xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                  {team.icon}
+                </div>
+                <h3 className="text-xl font-bold text-slate-900 mb-2">{team.name}</h3>
+                <p className="text-cyan-600 font-semibold text-sm">{team.role}</p>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 px-4 md:px-6 bg-gradient-to-r from-cyan-600 to-blue-600">
+        <div className="max-w-4xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+              Siap untuk Memulai Proyek Anda?
+            </h2>
+            <p className="text-cyan-50 text-lg mb-8 max-w-2xl mx-auto">
+              Hubungi tim kami hari ini untuk mendapatkan konsultasi gratis dan penawaran terbaik untuk material konstruksi Anda.
+            </p>
+            <Link
+              href="/kontak"
+              className="inline-block px-8 py-4 bg-white text-blue-600 font-bold rounded-lg hover:bg-gray-50 transition-all duration-300 shadow-lg hover:shadow-xl"
+            >
+              Hubungi Kami Sekarang
+            </Link>
+          </motion.div>
+        </div>
+      </section>
     </main>
   );
 }
