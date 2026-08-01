@@ -102,7 +102,7 @@ export default function ProdukPage() {
   };
 
   return (
-    <main className="bg-gradient-to-b from-white to-slate-50 min-h-screen">
+    <main className="bg-gradient-to-b from-white to-slate-50 min-h-screen transition-colors duration-300 dark:from-slate-900 dark:to-slate-800">
       {/* Header Section */}
       <section className="pt-16 pb-12 px-4 md:px-6">
         <div className="max-w-6xl mx-auto">
@@ -122,7 +122,7 @@ export default function ProdukPage() {
               <span className="gradient-text">Material Berkualitas Terpercaya</span>
             </h1>
 
-            <p className="text-gray-600 max-w-3xl mx-auto text-lg mb-6">
+            <p className="text-gray-600 max-w-3xl mx-auto text-lg mb-6 dark:text-gray-300">
               Kami menyediakan berbagai jenis material konstruksi berkualitas premium dengan harga kompetitif
               dan layanan pengiriman profesional ke seluruh wilayah Jabodetabek.
             </p>
@@ -142,7 +142,7 @@ export default function ProdukPage() {
                 className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
                   selectedCategory === category.value
                     ? "bg-gradient-to-r from-cyan-500 to-blue-500 text-white shadow-lg"
-                    : "bg-white text-gray-700 border-2 border-gray-200 hover:border-cyan-500 hover:text-cyan-600"
+                    : "bg-white text-gray-700 border-2 border-gray-200 hover:border-cyan-500 hover:text-cyan-600 dark:bg-slate-800 dark:text-gray-100 dark:border-slate-700 dark:hover:text-cyan-400"
                 }`}
               >
                 {category.label}
@@ -161,7 +161,7 @@ export default function ProdukPage() {
             {filteredProduk.map((produk) => (
               <motion.div
                 key={produk.id}
-                className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 card-hover"
+                className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 card-hover dark:bg-slate-800 dark:border-slate-700"
                 variants={itemVariants}
               >
                 {/* Image Container */}
@@ -185,18 +185,18 @@ export default function ProdukPage() {
 
                 {/* Content */}
                 <div className="p-6">
-                  <h3 className="text-2xl font-bold text-slate-900 mb-2">
+                  <h3 className="text-2xl font-bold text-slate-900 mb-2 dark:text-white">
                     {produk.nama}
                   </h3>
 
-                  <p className="text-gray-600 text-sm mb-4 leading-relaxed">
+                  <p className="text-gray-600 text-sm mb-4 leading-relaxed dark:text-gray-300">
                     {produk.deskripsi}
                   </p>
 
                   {/* Spesifikasi */}
                   <div className="mb-6 space-y-2">
                     {produk.spesifikasi.map((spec, idx) => (
-                      <div key={idx} className="flex items-start gap-2 text-sm text-gray-600">
+                      <div key={idx} className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-300">
                         <span className="inline-block w-1.5 h-1.5 bg-cyan-500 rounded-full mt-1.5 flex-shrink-0" />
                         <span>{spec}</span>
                       </div>
@@ -242,11 +242,11 @@ export default function ProdukPage() {
             ].map((item, idx) => (
               <div
                 key={idx}
-                className="p-6 bg-white rounded-xl border border-gray-200 text-center"
+                className="p-6 bg-white rounded-xl border border-gray-200 text-center dark:bg-slate-800 dark:border-slate-700"
               >
                 <div className="text-4xl mb-3">{item.icon}</div>
-                <h4 className="font-bold text-slate-900 mb-2">{item.title}</h4>
-                <p className="text-gray-600 text-sm">{item.desc}</p>
+                <h4 className="font-bold text-slate-900 mb-2 dark:text-white">{item.title}</h4>
+                <p className="text-gray-600 text-sm dark:text-gray-300">{item.desc}</p>
               </div>
             ))}
           </motion.div>

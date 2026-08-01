@@ -3,8 +3,11 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { useTheme } from "@/components/ThemeContext";
 
 export default function HomePage() {
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
   const features = [
     {
       id: 1,
@@ -65,9 +68,9 @@ export default function HomePage() {
   };
 
   return (
-    <main className="overflow-hidden bg-white">
+    <main className={`overflow-hidden transition-colors duration-300 ${isDark ? 'dark bg-slate-900' : 'bg-white'}`}>
       {/* Hero Section */}
-      <section className="relative pt-20 pb-32 md:pt-32 md:pb-48 px-4 md:px-6">
+      <section className={`relative pt-20 pb-32 md:pt-32 md:pb-48 px-4 md:px-6 transition-colors duration-300 ${isDark ? 'dark bg-slate-900' : 'bg-white'}`}>
         {/* Background decorations */}
         <div className="absolute inset-0 -z-10 overflow-hidden">
           <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-cyan-200 via-blue-200 to-purple-200 rounded-full blur-3xl opacity-30 animate-blob" />
@@ -93,13 +96,13 @@ export default function HomePage() {
             </motion.div>
 
             {/* Main Heading */}
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+            <h1 className={`text-4xl md:text-6xl font-bold mb-6 leading-tight transition-colors duration-300 ${isDark ? 'dark text-white' : 'text-slate-900'}`}>
               <span className="block mb-2">PT. Mandala Putra</span>
               <span className="gradient-text">Persada</span>
             </h1>
 
             {/* Tagline */}
-            <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
+            <p className={`text-lg md:text-xl mb-8 max-w-2xl mx-auto leading-relaxed transition-colors duration-300 ${isDark ? 'dark text-gray-400' : 'text-gray-600'}`}>
               Kami menyediakan material konstruksi berkualitas tinggi dengan layanan profesional untuk mendukung kesuksesan setiap proyek Anda.
             </p>
 
@@ -128,11 +131,12 @@ export default function HomePage() {
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <Image
                   src="/hero.png"
-                  alt="PT Mandala Putra Persada"
-                  width={500}
-                  height={400}
+                  alt="PT Mandala Putra Persada - Material Konstruksi Profesional"
+                  width={350}
+                  height={280}
                   className="w-full h-auto object-cover"
                   priority
+                  unoptimized
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl" />
               </div>
@@ -169,7 +173,7 @@ export default function HomePage() {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 px-4 md:px-6">
+      <section className={`py-20 px-4 md:px-6 transition-colors duration-300 ${isDark ? 'dark bg-slate-800' : 'bg-white'}`}>
         <div className="max-w-6xl mx-auto">
           {/* Section Header */}
           <motion.div
@@ -179,9 +183,9 @@ export default function HomePage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Keunggulan Kami</h2>
+            <h2 className={`text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent`}>Keunggulan Kami</h2>
             <div className="w-16 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full mx-auto mb-4" />
-            <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+            <p className={`max-w-2xl mx-auto text-lg transition-colors duration-300 ${isDark ? 'dark text-gray-300' : 'text-gray-600'}`}>
               Kami berkomitmen memberikan layanan terbaik dengan produk berkualitas tinggi
             </p>
           </motion.div>
@@ -197,7 +201,11 @@ export default function HomePage() {
             {features.map((feature) => (
               <motion.div
                 key={feature.id}
-                className="p-8 rounded-2xl bg-gradient-to-br from-slate-50 to-white border border-slate-200 card-hover group"
+                className={`p-8 rounded-2xl bg-gradient-to-br border transition-colors duration-300 card-hover group ${
+                  isDark
+                    ? 'dark from-slate-700 to-slate-600 border-slate-600 hover:border-cyan-500'
+                    : 'from-slate-50 to-white border-slate-200'
+                }`}
                 variants={itemVariants}
               >
                 {/* Icon Background */}
@@ -206,10 +214,10 @@ export default function HomePage() {
                 </div>
 
                 {/* Content */}
-                <h3 className="text-xl font-bold text-slate-900 mb-3">
+                <h3 className={`text-xl font-bold mb-3 transition-colors duration-300 ${isDark ? 'dark text-white' : 'text-slate-900'}`}>
                   {feature.title}
                 </h3>
-                <p className="text-gray-600 leading-relaxed">
+                <p className={`leading-relaxed transition-colors duration-300 ${isDark ? 'dark text-gray-300' : 'text-gray-600'}`}>
                   {feature.description}
                 </p>
               </motion.div>
@@ -219,7 +227,7 @@ export default function HomePage() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-20 px-4 md:px-6 bg-gradient-to-b from-slate-50 to-white">
+      <section className={`py-20 px-4 md:px-6 transition-colors duration-300 ${isDark ? 'dark bg-slate-900' : 'bg-gradient-to-b from-slate-50 to-white'}`}>
         <div className="max-w-6xl mx-auto">
           <motion.div
             className="text-center mb-16"
@@ -228,9 +236,9 @@ export default function HomePage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Testimoni Klien Kami</h2>
+            <h2 className={`text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent`}>Testimoni Klien Kami</h2>
             <div className="w-16 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full mx-auto mb-4" />
-            <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+            <p className={`max-w-2xl mx-auto text-lg transition-colors duration-300 ${isDark ? 'dark text-gray-300' : 'text-gray-600'}`}>
               Kepuasan klien adalah prioritas utama kami, dan kami bangga dengan reputasi yang telah dibangun
             </p>
           </motion.div>
@@ -264,7 +272,11 @@ export default function HomePage() {
             ].map((testimonial, idx) => (
               <motion.div
                 key={idx}
-                className="p-8 bg-white rounded-2xl shadow-lg border border-gray-200 card-hover"
+                className={`p-8 rounded-2xl shadow-lg border transition-colors duration-300 card-hover ${
+                  isDark
+                    ? 'dark bg-slate-700 border-slate-600'
+                    : 'bg-white border-gray-200'
+                }`}
                 variants={itemVariants}
               >
                 <div className="flex gap-1 mb-4">
@@ -276,11 +288,11 @@ export default function HomePage() {
                       </span>
                     ))}
                 </div>
-                <p className="text-gray-700 mb-6 leading-relaxed italic">
+                <p className={`mb-6 leading-relaxed italic transition-colors duration-300 ${isDark ? 'dark text-gray-200' : 'text-gray-700'}`}>
                   "{testimonial.content}"
                 </p>
-                <div className="border-t pt-4">
-                  <h4 className="font-bold text-slate-900">{testimonial.name}</h4>
+                <div className={`border-t pt-4 transition-colors duration-300 ${isDark ? 'dark border-slate-600' : 'border-gray-200'}`}>
+                  <h4 className={`font-bold transition-colors duration-300 ${isDark ? 'dark text-white' : 'text-slate-900'}`}>{testimonial.name}</h4>
                   <p className="text-sm text-cyan-600">{testimonial.role}</p>
                 </div>
               </motion.div>
@@ -290,7 +302,7 @@ export default function HomePage() {
       </section>
 
       {/* Team Section */}
-      <section className="py-20 px-4 md:px-6 bg-gradient-to-b from-white to-slate-50">
+      <section className={`py-20 px-4 md:px-6 transition-colors duration-300 ${isDark ? 'dark bg-slate-800' : 'bg-gradient-to-b from-white to-slate-50'}`}>
         <div className="max-w-6xl mx-auto">
           <motion.div
             className="text-center mb-16"
@@ -299,9 +311,9 @@ export default function HomePage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Tim Profesional Kami</h2>
+            <h2 className={`text-3xl md:text-4xl font-bold mb-4 transition-colors duration-300 ${isDark ? 'dark text-white' : 'text-slate-900'}`}>Tim Profesional Kami</h2>
             <div className="w-16 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full mx-auto mb-4" />
-            <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+            <p className={`max-w-2xl mx-auto text-lg transition-colors duration-300 ${isDark ? 'dark text-gray-300' : 'text-gray-600'}`}>
               Tim berpengalaman dan berdedikasi siap memberikan solusi terbaik untuk kebutuhan Anda
             </p>
           </motion.div>
@@ -337,13 +349,17 @@ export default function HomePage() {
             ].map((team, idx) => (
               <motion.div
                 key={idx}
-                className="p-8 bg-white rounded-2xl shadow-lg border border-gray-200 text-center card-hover group"
+                className={`p-8 rounded-2xl shadow-lg border text-center card-hover group transition-colors duration-300 ${
+                  isDark
+                    ? 'dark bg-slate-700 border-slate-600'
+                    : 'bg-white border-gray-200'
+                }`}
                 variants={itemVariants}
               >
                 <div className="text-5xl mb-4 group-hover:scale-110 transition-transform duration-300">
                   {team.icon}
                 </div>
-                <h3 className="text-xl font-bold text-slate-900 mb-2">{team.name}</h3>
+                <h3 className={`text-xl font-bold mb-2 transition-colors duration-300 ${isDark ? 'dark text-white' : 'text-slate-900'}`}>{team.name}</h3>
                 <p className="text-cyan-600 font-semibold text-sm">{team.role}</p>
               </motion.div>
             ))}
@@ -352,7 +368,7 @@ export default function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-4 md:px-6 bg-gradient-to-r from-cyan-600 to-blue-600">
+      <section className={`py-20 px-4 md:px-6 transition-colors duration-300 ${isDark ? 'dark bg-slate-900' : 'bg-gradient-to-r from-cyan-600 to-blue-600'}`}>
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -360,10 +376,10 @@ export default function HomePage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+            <h2 className={`text-3xl md:text-4xl font-bold mb-6 transition-colors duration-300 ${isDark ? 'dark text-white' : 'text-white'}`}>
               Siap untuk Memulai Proyek Anda?
             </h2>
-            <p className="text-cyan-50 text-lg mb-8 max-w-2xl mx-auto">
+            <p className={`text-lg mb-8 max-w-2xl mx-auto transition-colors duration-300 ${isDark ? 'dark text-gray-300' : 'text-cyan-50'}`}>
               Hubungi tim kami hari ini untuk mendapatkan konsultasi gratis dan penawaran terbaik untuk material konstruksi Anda.
             </p>
             <Link

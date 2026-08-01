@@ -4,9 +4,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { useTheme } from "./ThemeContext";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   const navLinks = [
     { href: "/", label: "Beranda" },
@@ -34,7 +36,7 @@ export default function Header() {
         </Link>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-6">
           {navLinks.map((link) => (
             <Link
               key={link.href}
@@ -45,6 +47,19 @@ export default function Header() {
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-500 group-hover:w-full transition-all duration-300" />
             </Link>
           ))}
+
+          <button
+            type="button"
+            onClick={toggleTheme}
+            aria-label="Toggle tema"
+            className="flex items-center gap-2 rounded-full border border-slate-600 bg-slate-800/80 px-3 py-2 text-sm text-gray-200 shadow-sm transition hover:border-cyan-400 hover:text-cyan-400"
+          >
+            <span>{theme === "dark" ? "🌙" : "☀️"}</span>
+            <span className="hidden lg:inline">{theme === "dark" ? "Mode Malam" : "Mode Siang"}</span>
+            <span className={`relative inline-flex h-6 w-11 items-center rounded-full transition ${theme === "dark" ? "bg-cyan-500" : "bg-slate-600"}`}>
+              <span className={`inline-block h-5 w-5 transform rounded-full bg-white transition ${theme === "dark" ? "translate-x-5" : "translate-x-1"}`} />
+            </span>
+          </button>
         </div>
 
         {/* Mobile Menu Button */}
@@ -79,6 +94,20 @@ export default function Header() {
                 {link.label}
               </Link>
             ))}
+
+            <button
+              type="button"
+              onClick={() => {
+                toggleTheme();
+                setMenuOpen(false);
+              }}
+              className="flex items-center justify-between rounded-lg border border-slate-700 bg-slate-700/70 px-3 py-2 text-sm text-gray-200"
+            >
+              <span>{theme === "dark" ? "Mode Malam" : "Mode Siang"}</span>
+              <span className={`relative inline-flex h-6 w-11 items-center rounded-full transition ${theme === "dark" ? "bg-cyan-500" : "bg-slate-600"}`}>
+                <span className={`inline-block h-5 w-5 transform rounded-full bg-white transition ${theme === "dark" ? "translate-x-5" : "translate-x-1"}`} />
+              </span>
+            </button>
           </div>
         </motion.div>
       )}

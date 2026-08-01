@@ -74,9 +74,9 @@ export default function KontakPage() {
   };
 
   return (
-    <main className="bg-white overflow-hidden">
+    <main className="bg-white overflow-hidden transition-colors duration-300 dark:bg-slate-900">
       {/* Header Section */}
-      <section className="relative pt-20 pb-12 px-4 md:px-6 bg-gradient-to-b from-slate-50 to-white">
+      <section className="relative pt-20 pb-12 px-4 md:px-6 bg-gradient-to-b from-slate-50 to-white transition-colors duration-300 dark:from-slate-800 dark:to-slate-900">
         <div className="absolute inset-0 -z-10 overflow-hidden">
           <div className="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-br from-cyan-200 to-blue-200 rounded-full blur-3xl opacity-20" />
         </div>
@@ -88,11 +88,11 @@ export default function KontakPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-slate-900 dark:text-white">
               <span className="block mb-2">Hubungi Kami</span>
               <span className="gradient-text">Mari Berkolaborasi Bersama</span>
             </h1>
-            <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+            <p className="text-gray-600 max-w-2xl mx-auto text-lg dark:text-gray-300">
               Kami siap membantu Anda dengan konsultasi gratis dan solusi material konstruksi terbaik untuk proyek Anda
             </p>
           </motion.div>
@@ -115,14 +115,14 @@ export default function KontakPage() {
                 href={info.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group p-6 rounded-xl bg-gradient-to-br from-slate-50 to-white border-2 border-slate-200 hover:border-cyan-500 transition-all duration-300 card-hover cursor-pointer"
+                className="group p-6 rounded-xl bg-gradient-to-br from-slate-50 to-white border-2 border-slate-200 hover:border-cyan-500 transition-all duration-300 card-hover cursor-pointer dark:from-slate-800 dark:to-slate-700 dark:border-slate-700"
                 variants={itemVariants}
               >
                 <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
                   {info.icon}
                 </div>
-                <h3 className="font-bold text-slate-900 mb-2 text-lg">{info.title}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed group-hover:text-cyan-600 transition-colors duration-300">
+                <h3 className="font-bold text-slate-900 mb-2 text-lg dark:text-white">{info.title}</h3>
+                <p className="text-gray-600 text-sm leading-relaxed group-hover:text-cyan-600 transition-colors duration-300 dark:text-gray-300">
                   {info.content}
                 </p>
               </motion.a>
@@ -132,7 +132,7 @@ export default function KontakPage() {
       </section>
 
       {/* Main Contact Section */}
-      <section className="py-20 px-4 md:px-6 bg-gradient-to-b from-white to-slate-50">
+      <section className="py-20 px-4 md:px-6 bg-gradient-to-b from-white to-slate-50 transition-colors duration-300 dark:from-slate-900 dark:to-slate-800">
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12">
             {/* Contact Form */}
@@ -143,15 +143,15 @@ export default function KontakPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <h2 className="text-3xl font-bold text-slate-900 mb-2">Kirim Pesan Anda</h2>
-              <p className="text-gray-600 mb-8">
+              <h2 className="text-3xl font-bold text-slate-900 mb-2 dark:text-white">Kirim Pesan Anda</h2>
+              <p className="text-gray-600 mb-8 dark:text-gray-300">
                 Kami akan merespons pesan Anda dalam 24 jam kerja
               </p>
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Name */}
                 <div>
-                  <label htmlFor="name" className="block text-sm font-semibold text-slate-900 mb-2">
+                  <label htmlFor="name" className="block text-sm font-semibold text-slate-900 mb-2 dark:text-gray-200">
                     Nama Lengkap
                   </label>
                   <input
@@ -219,7 +219,7 @@ export default function KontakPage() {
                     name="message"
                     required
                     rows={5}
-                    className="w-full px-4 py-3 rounded-lg border-2 border-slate-200 focus:border-cyan-500 focus:outline-none transition-colors duration-300 resize-none"
+                    className="w-full px-4 py-3 rounded-lg border-2 border-slate-200 bg-white text-slate-900 focus:border-cyan-500 focus:outline-none transition-colors duration-300 resize-none dark:border-slate-700 dark:bg-slate-800 dark:text-white"
                     placeholder="Tuliskan pesan atau pertanyaan Anda..."
                   />
                 </div>
@@ -327,7 +327,7 @@ export default function KontakPage() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20 px-4 md:px-6 bg-slate-50">
+      <section className="py-20 px-4 md:px-6 bg-slate-50 transition-colors duration-300 dark:bg-slate-800">
         <div className="max-w-4xl mx-auto">
           <motion.div
             className="text-center mb-12"
@@ -367,11 +367,11 @@ export default function KontakPage() {
             ].map((faq, idx) => (
               <motion.div
                 key={idx}
-                className="p-6 bg-white rounded-lg border-2 border-slate-200 hover:border-cyan-500 transition-colors duration-300"
+                className="p-6 bg-white rounded-lg border-2 border-slate-200 hover:border-cyan-500 transition-colors duration-300 dark:bg-slate-700 dark:border-slate-600"
                 variants={itemVariants}
               >
-                <h3 className="font-bold text-slate-900 mb-2 text-lg">❓ {faq.q}</h3>
-                <p className="text-gray-600">{faq.a}</p>
+                <h3 className="font-bold text-slate-900 mb-2 text-lg dark:text-white">❓ {faq.q}</h3>
+                <p className="text-gray-600 dark:text-gray-300">{faq.a}</p>
               </motion.div>
             ))}
           </motion.div>

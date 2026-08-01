@@ -83,9 +83,9 @@ export default function TentangPage() {
   ];
 
   return (
-    <main className="bg-white overflow-hidden">
+    <main className="bg-white overflow-hidden transition-colors duration-300 dark:bg-slate-900">
       {/* Header Section */}
-      <section className="relative pt-20 pb-16 px-4 md:px-6 bg-gradient-to-b from-slate-50 to-white">
+      <section className="relative pt-20 pb-16 px-4 md:px-6 bg-gradient-to-b from-slate-50 to-white transition-colors duration-300 dark:from-slate-800 dark:to-slate-900">
         <div className="absolute inset-0 -z-10 overflow-hidden">
           <div className="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-br from-cyan-200 to-blue-200 rounded-full blur-3xl opacity-20" />
           <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-gradient-to-tr from-blue-200 to-cyan-100 rounded-full blur-3xl opacity-20" />
@@ -98,11 +98,11 @@ export default function TentangPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-slate-900 dark:text-white">
               <span className="block mb-2">Tentang</span>
               <span className="gradient-text">PT. Mandala Putra Persada</span>
             </h1>
-            <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+            <p className="text-gray-600 max-w-2xl mx-auto text-lg dark:text-gray-300">
               Kami adalah mitra terpercaya dalam menyediakan solusi material konstruksi berkualitas tinggi
               untuk mendukung pembangunan infrastruktur nasional yang berkelanjutan.
             </p>
@@ -161,8 +161,8 @@ export default function TentangPage() {
 
                 {/* Content */}
                 <div className="flex-grow pt-4">
-                  <h3 className="text-2xl font-bold text-slate-900 mb-2">{item.title}</h3>
-                  <p className="text-gray-600 text-lg leading-relaxed">{item.desc}</p>
+                  <h3 className="text-2xl font-bold text-slate-900 mb-2 dark:text-white">{item.title}</h3>
+                  <p className="text-gray-600 text-lg leading-relaxed dark:text-gray-300">{item.desc}</p>
                 </div>
               </motion.div>
             ))}
@@ -265,12 +265,12 @@ export default function TentangPage() {
             {values.map((value) => (
               <motion.div
                 key={value.title}
-                className="p-8 rounded-xl bg-gradient-to-br from-slate-50 to-white border-2 border-slate-200 text-center card-hover"
+                className="p-8 rounded-xl bg-gradient-to-br from-slate-50 to-white border-2 border-slate-200 text-center card-hover dark:from-slate-800 dark:to-slate-700 dark:border-slate-700"
                 variants={itemVariants}
               >
                 <div className="text-5xl mb-4">{value.icon}</div>
-                <h3 className="text-xl font-bold text-slate-900 mb-3">{value.title}</h3>
-                <p className="text-gray-600">{value.desc}</p>
+                <h3 className="text-xl font-bold text-slate-900 mb-3 dark:text-white">{value.title}</h3>
+                <p className="text-gray-600 dark:text-gray-300">{value.desc}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -278,7 +278,7 @@ export default function TentangPage() {
       </section>
 
       {/* Misi Detail Section */}
-      <section className="py-20 px-4 md:px-6 bg-slate-50">
+      <section className="py-20 px-4 md:px-6 bg-slate-50 transition-colors duration-300 dark:bg-slate-800">
         <div className="max-w-6xl mx-auto">
           <motion.div
             className="text-center mb-16"
@@ -288,7 +288,7 @@ export default function TentangPage() {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Komitmen Kami</h2>
-            <p className="text-gray-600 max-w-3xl mx-auto text-lg">
+            <p className="text-gray-600 max-w-3xl mx-auto text-lg dark:text-gray-300">
               Kami berkomitmen untuk terus berinovasi dan berkembang demi memberikan nilai terbaik kepada semua stakeholder
             </p>
           </motion.div>
@@ -303,12 +303,12 @@ export default function TentangPage() {
             {misiPoints.slice(0, 5).map((point) => (
               <motion.div
                 key={point.title}
-                className="p-8 bg-white rounded-2xl border border-gray-200 shadow-md hover:shadow-lg transition-all duration-300"
+                className="p-8 bg-white rounded-2xl border border-gray-200 shadow-md hover:shadow-lg transition-all duration-300 dark:bg-slate-700 dark:border-slate-600"
                 variants={itemVariants}
               >
                 <div className="text-5xl mb-4">{point.icon}</div>
-                <h3 className="text-xl font-bold text-slate-900 mb-3">{point.title}</h3>
-                <p className="text-gray-600 leading-relaxed">{point.desc}</p>
+                <h3 className="text-xl font-bold text-slate-900 mb-3 dark:text-white">{point.title}</h3>
+                <p className="text-gray-600 leading-relaxed dark:text-gray-300">{point.desc}</p>
               </motion.div>
             ))}
           </motion.div>
