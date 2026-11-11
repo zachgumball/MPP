@@ -10,8 +10,9 @@ const poppins = Poppins({
 });
 
 export const metadata = {
-  title: "PT. Mandala Putra Persada - Material Konstruksi Berkualitas",
-  description: "Penyedia material konstruksi berkualitas tinggi: batu belah, split, pasir, dan tanah urug untuk proyek infrastruktur nasional.",
+  metadataBase: new URL("https://mandalapersada.vercel.app"),
+  title: "PT. Mandala Putra Persada | Material Konstruksi",
+  description: "Penyedia material konstruksi: batu belah, split, pasir, abu batu, screening, dan tanah urug.",
   keywords: "material konstruksi, batu belah, pasir, split, tanah urug, paving block",
   icons: {
     icon: "/mpp.png",
@@ -39,12 +40,12 @@ export default function RootLayout({
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#0f172a" />
+        <meta name="theme-color" content="#f7f7f4" />
       </head>
-      <body className={`${poppins.className} bg-white text-gray-900 transition-colors duration-300 dark:bg-slate-900 dark:text-slate-100`}>
+      <body className={`${poppins.className} transition-colors duration-300`}>
         <ThemeProvider>
           <Header />
-          <main className="min-h-screen">{children}</main>
+          {children}
           <Footer />
         </ThemeProvider>
       </body>

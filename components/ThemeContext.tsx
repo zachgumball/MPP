@@ -15,8 +15,10 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>("light");
 
   useEffect(() => {
-    const storedTheme = window.localStorage.getItem("mpp-theme") as Theme | null;
-    const initialTheme = storedTheme ?? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    const storedTheme = window.localStorage.getItem("mpp-theme");
+    const initialTheme = storedTheme === "light" || storedTheme === "dark"
+      ? storedTheme
+      : window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
     setTheme(initialTheme);
   }, []);
 

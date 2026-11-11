@@ -1,255 +1,140 @@
 "use client";
 
-import { useState, useMemo } from "react";
-import { motion } from "framer-motion";
+import { useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
+type Kategori = "batu" | "pasir" | "screening" | "lainnya";
 type Produk = {
   id: number;
   nama: string;
-  kategori: "batu" | "pasir" | "screening" | "dekorasi";
+  kategori: Kategori;
   deskripsi: string;
   spesifikasi: string[];
   gambar: string;
 };
 
 const produkList: Produk[] = [
-  {
-    id: 1,
-    nama: "Batu Belah",
-    kategori: "batu",
-    deskripsi: "Batu hasil pemecahan alam untuk pondasi dan konstruksi bangunan berat dengan kualitas terjamin.",
-    spesifikasi: ["Ukuran: 10-30 cm", "Kualitas Premium", "Cocok untuk fondasi dan saluran air"],
-    gambar: "/batu-belah.jpg",
-  },
-  {
-    id: 2,
-    nama: "Split",
-    kategori: "batu",
-    deskripsi: "Batu pecah berbagai ukuran untuk campuran beton dan infrastruktur jalan berkualitas tinggi.",
-    spesifikasi: ["Ukuran: 10-30 mm", "Gradasi sempurna", "Untuk campuran beton", "Infrastruktur jalan"],
-    gambar: "/split.jpg",
-  },
-  {
-    id: 3,
-    nama: "Pasir",
-    kategori: "pasir",
-    deskripsi: "Pasir berkualitas tinggi untuk cor, beton, keramik, dan konstruksi umum dengan standar nasional.",
-    spesifikasi: ["Ukuran gradasi terukur", "Bersih dan bebas lumpur", "Cocok untuk semua jenis konstruksi"],
-    gambar: "/pasir.png",
-  },
-  {
-    id: 4,
-    nama: "Abu Batu",
-    kategori: "pasir",
-    deskripsi: "Material berukuran sangat halus untuk campuran beton, paving, dan pengerasan jalan profesional.",
-    spesifikasi: ["Ukuran ultra halus", "Untuk campuran beton", "Paving dan pengerasan jalan"],
-    gambar: "/abu-batu.jpg",
-  },
-  {
-    id: 5,
-    nama: "Screening",
-    kategori: "screening",
-    deskripsi: "Material batu kecil hasil penyaringan untuk lapisan dasar dan campuran konstruksi berkualitas.",
-    spesifikasi: ["Ukuran 3-5 cm", "Lapisan dasar", "Campuran konstruksi", "Pemadatan optimal"],
-    gambar: "/screening.jpg",
-  },
-  {
-    id: 6,
-    nama: "Tanah Urug",
-    kategori: "dekorasi",
-    deskripsi: "Tanah urug pilihan untuk pengurugan dan persiapan lahan proyek konstruksi berskala besar.",
-    spesifikasi: ["Tanah pilihan", "Pengurugan lahan", "Persiapan proyek", "Harga kompetitif"],
-    gambar: "/pasir.png",
-  },
+  { id: 1, nama: "Batu Belah", kategori: "batu", deskripsi: "Batu alam untuk pondasi dan konstruksi bangunan.", spesifikasi: ["Ukuran 10–30 cm", "Untuk fondasi dan saluran air"], gambar: "/batu-belah.jpg" },
+  { id: 2, nama: "Batu Split", kategori: "batu", deskripsi: "Batu pecah berbagai ukuran untuk campuran beton dan infrastruktur jalan.", spesifikasi: ["Ukuran 10–30 mm", "Gradasi untuk kebutuhan konstruksi"], gambar: "/split.jpg" },
+  { id: 3, nama: "Pasir", kategori: "pasir", deskripsi: "Pasir untuk cor, beton, keramik, dan konstruksi umum.", spesifikasi: ["Gradasi terukur", "Untuk berbagai kebutuhan konstruksi"], gambar: "/pasir.png" },
+  { id: 4, nama: "Abu Batu", kategori: "pasir", deskripsi: "Material berukuran halus untuk campuran beton, paving, dan pengerasan jalan.", spesifikasi: ["Ukuran halus", "Untuk campuran dan pengerasan jalan"], gambar: "/abu-batu.jpg" },
+  { id: 5, nama: "Screening", kategori: "screening", deskripsi: "Material batu hasil penyaringan untuk lapisan dasar dan campuran konstruksi.", spesifikasi: ["Ukuran 3–5 cm", "Untuk lapisan dasar"], gambar: "/screening.jpg" },
+  { id: 6, nama: "Tanah Urug", kategori: "lainnya", deskripsi: "Material untuk pengurugan dan persiapan lahan proyek konstruksi.", spesifikasi: ["Untuk pengurugan lahan", "Cocok untuk persiapan proyek"], gambar: "/pasir.png" },
+];
+
+const categories: { value: Kategori | "semua"; label: string }[] = [
+  { value: "semua", label: "Semua produk" },
+  { value: "batu", label: "Batu pecah" },
+  { value: "pasir", label: "Pasir & abu batu" },
+  { value: "screening", label: "Screening" },
+  { value: "lainnya", label: "Lainnya" },
 ];
 
 export default function ProdukPage() {
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-
-  const categories = [
-    { value: null, label: "Semua Produk" },
-    { value: "batu", label: "Batu Pecah" },
-    { value: "pasir", label: "Pasir & Abu" },
-    { value: "screening", label: "Screening" },
-    { value: "dekorasi", label: "Lainnya" },
-  ];
-
-  const filteredProduk = useMemo(() => {
-    if (!selectedCategory) return produkList;
-    return produkList.filter((p) => p.kategori === selectedCategory);
-  }, [selectedCategory]);
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6 },
-    },
-  };
+  const [selectedCategory, setSelectedCategory] = useState<Kategori | "semua">("semua");
+  const filteredProduk = useMemo(
+    () => selectedCategory === "semua" ? produkList : produkList.filter((product) => product.kategori === selectedCategory),
+    [selectedCategory],
+  );
 
   return (
-    <main className="bg-gradient-to-b from-white to-slate-50 min-h-screen transition-colors duration-300 dark:from-slate-900 dark:to-slate-800">
-      {/* Header Section */}
-      <section className="pt-16 pb-12 px-4 md:px-6">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            className="text-center mb-12"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 px-4 py-2 rounded-full font-semibold text-sm mb-6">
-              <span className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" />
-              Katalog Produk Lengkap
+    <main className="page-shell min-h-screen">
+      <section className="px-5 pb-10 pt-16 md:px-8 md:pb-14 md:pt-24">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-end">
+            <div className="max-w-3xl">
+              <p className="eyebrow text-xs font-bold uppercase tracking-[0.22em]">Katalog material</p>
+              <h1 className="mt-4 text-4xl font-semibold leading-tight tracking-tight sm:text-5xl md:text-6xl">
+                Temukan material
+                <br className="hidden sm:block" /> untuk kebutuhan proyek.
+              </h1>
+              <p className="text-muted mt-5 max-w-2xl text-base leading-7">
+                Jelajahi pilihan material konstruksi kami. Hubungi tim untuk konsultasi spesifikasi dan ketersediaan.
+              </p>
             </div>
+            <div className="surface-card rounded-2xl px-5 py-4 md:min-w-48">
+              <p className="eyebrow text-xs font-semibold uppercase tracking-wider">Katalog</p>
+              <p className="mt-1 text-2xl font-semibold">{produkList.length} pilihan</p>
+              <p className="text-muted text-xs">material konstruksi</p>
+            </div>
+          </div>
 
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              <span className="block mb-2">Produk Unggulan Kami</span>
-              <span className="gradient-text">Material Berkualitas Terpercaya</span>
-            </h1>
-
-            <p className="text-gray-600 max-w-3xl mx-auto text-lg mb-6 dark:text-gray-300">
-              Kami menyediakan berbagai jenis material konstruksi berkualitas premium dengan harga kompetitif
-              dan layanan pengiriman profesional ke seluruh wilayah Jabodetabek.
-            </p>
-          </motion.div>
-
-          {/* Filter Categories */}
-          <motion.div
-            className="flex flex-wrap justify-center gap-3 mb-12"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-          >
+          <div className="mt-10 flex gap-2 overflow-x-auto pb-2" role="group" aria-label="Filter kategori produk">
             {categories.map((category) => (
               <button
                 key={category.value}
-                onClick={() => setSelectedCategory(category.value as string | null)}
-                className={`px-6 py-3 rounded-full font-semibold transition-all duration-300 ${
+                type="button"
+                aria-pressed={selectedCategory === category.value}
+                onClick={() => setSelectedCategory(category.value)}
+                className={`shrink-0 rounded-full px-5 py-2.5 text-sm font-medium transition ${
                   selectedCategory === category.value
-                    ? "bg-gradient-to-r from-cyan-500 to-blue-500 text-white shadow-lg"
-                    : "bg-white text-gray-700 border-2 border-gray-200 hover:border-cyan-500 hover:text-cyan-600 dark:bg-slate-800 dark:text-gray-100 dark:border-slate-700 dark:hover:text-cyan-400"
+                    ? "bg-[#263b32] text-white shadow-sm"
+                    : "surface-card text-muted hover:border-[var(--accent)] hover:text-[var(--foreground)]"
                 }`}
               >
                 {category.label}
               </button>
             ))}
-          </motion.div>
+          </div>
 
-          {/* Products Grid */}
-          <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            key={selectedCategory}
-          >
+          <motion.div layout className="mt-7 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {filteredProduk.map((produk) => (
-              <motion.div
+              <motion.article
+                layout
                 key={produk.id}
-                className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 card-hover dark:bg-slate-800 dark:border-slate-700"
-                variants={itemVariants}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+                className="surface-card group overflow-hidden rounded-2xl transition duration-300 hover:-translate-y-1 hover:shadow-xl"
               >
-                {/* Image Container */}
-                <div className="relative h-64 overflow-hidden bg-gradient-to-br from-slate-100 to-slate-200">
+                <div className="relative h-56 overflow-hidden bg-black/5">
                   <Image
                     src={produk.gambar}
                     alt={produk.nama}
-                    width={400}
-                    height={300}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-cover transition duration-700 group-hover:scale-105"
                   />
-
-                  {/* Badge */}
-                  <div className="absolute top-4 right-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-4 py-2 rounded-full text-sm font-semibold">
-                    {categories.find((c) => c.value === produk.kategori)?.label}
-                  </div>
-
-                  {/* Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-[#263b32] backdrop-blur">
+                    {categories.find((category) => category.value === produk.kategori)?.label}
+                  </span>
                 </div>
-
-                {/* Content */}
                 <div className="p-6">
-                  <h3 className="text-2xl font-bold text-slate-900 mb-2 dark:text-white">
-                    {produk.nama}
-                  </h3>
-
-                  <p className="text-gray-600 text-sm mb-4 leading-relaxed dark:text-gray-300">
-                    {produk.deskripsi}
-                  </p>
-
-                  {/* Spesifikasi */}
-                  <div className="mb-6 space-y-2">
-                    {produk.spesifikasi.map((spec, idx) => (
-                      <div key={idx} className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-300">
-                        <span className="inline-block w-1.5 h-1.5 bg-cyan-500 rounded-full mt-1.5 flex-shrink-0" />
-                        <span>{spec}</span>
-                      </div>
+                  <h2 className="text-xl font-semibold">{produk.nama}</h2>
+                  <p className="text-muted mt-2 min-h-12 text-sm leading-6">{produk.deskripsi}</p>
+                  <ul className="mt-5 space-y-2 border-t border-[var(--line)] pt-4">
+                    {produk.spesifikasi.map((spec) => (
+                      <li key={spec} className="flex items-start gap-2 text-sm text-muted">
+                        <span className="accent-text mt-0.5" aria-hidden="true">✓</span>
+                        {spec}
+                      </li>
                     ))}
-                  </div>
-
-                  {/* CTA Button */}
-                  <Link
-                    href="/kontak"
-                    className="block w-full text-center px-4 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold rounded-lg hover:from-cyan-400 hover:to-blue-500 transition-all duration-300"
-                  >
-                    Pesan Sekarang
+                  </ul>
+                  <Link href={`/kontak?produk=${encodeURIComponent(produk.nama)}`} className="accent-button mt-6 flex items-center justify-center gap-2 rounded-full px-4 py-3 text-sm font-semibold transition hover:shadow-md">
+                    Tanyakan produk <span aria-hidden="true">↗</span>
                   </Link>
                 </div>
-              </motion.div>
+              </motion.article>
             ))}
           </motion.div>
 
-          {/* Info Section */}
-          <motion.div
-            className="mt-20 grid md:grid-cols-3 gap-8"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            {[
-              {
-                icon: "📦",
-                title: "Pengiriman Tersedia",
-                desc: "Pengiriman gratis untuk pembelian minimal tertentu ke seluruh Jabodetabek",
-              },
-              {
-                icon: "✓",
-                title: "Kualitas Terjamin",
-                desc: "Semua produk telah melewati quality control ketat sesuai standar nasional",
-              },
-              {
-                icon: "💬",
-                title: "Konsultasi Gratis",
-                desc: "Tim ahli kami siap membantu memilih material yang tepat untuk proyek Anda",
-              },
-            ].map((item, idx) => (
-              <div
-                key={idx}
-                className="p-6 bg-white rounded-xl border border-gray-200 text-center dark:bg-slate-800 dark:border-slate-700"
-              >
-                <div className="text-4xl mb-3">{item.icon}</div>
-                <h4 className="font-bold text-slate-900 mb-2 dark:text-white">{item.title}</h4>
-                <p className="text-gray-600 text-sm dark:text-gray-300">{item.desc}</p>
-              </div>
-            ))}
-          </motion.div>
+          {filteredProduk.length === 0 && (
+            <p className="text-muted py-16 text-center" role="status">Produk pada kategori ini belum tersedia.</p>
+          )}
+        </div>
+      </section>
+
+      <section className="soft-section px-5 py-14 md:px-8 md:py-18">
+        <div className="mx-auto flex max-w-7xl flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <h2 className="text-2xl font-semibold tracking-tight">Butuh rekomendasi material?</h2>
+            <p className="text-muted mt-2 text-sm">Tim kami siap berdiskusi tentang kebutuhan proyek Anda.</p>
+          </div>
+          <Link href="/kontak" className="accent-button inline-flex items-center justify-center gap-3 rounded-full px-6 py-3 text-sm font-semibold transition hover:-translate-y-0.5">
+            Hubungi tim kami <span aria-hidden="true">→</span>
+          </Link>
         </div>
       </section>
     </main>

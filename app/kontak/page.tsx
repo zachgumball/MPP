@@ -1,380 +1,180 @@
 "use client";
 
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import type { FormEvent } from "react";
 import Link from "next/link";
+import { motion } from "framer-motion";
+
+const address = "Jl. Soekarno Hatta - By Pass No. 6 F, Kaduagung Tengah, Kec. Cinangka, Kab. Lebak, Prov. Banten";
+const contactItems = [
+  { icon: "⌖", label: "Lokasi kantor", value: address, href: "https://maps.google.com/?q=Jl.+Soekarno+Hatta+-+By+Pass+No.+6+F,+Kaduagung+Tengah,+Cinangka,+Kab.+Lebak,+Banten" },
+  { icon: "↗", label: "Telepon / WhatsApp", value: "0812-1832-7779", href: "https://wa.me/6281218327779" },
+  { icon: "✉", label: "Email", value: "mandalaputrapersada01@gmail.com", href: "mailto:mandalaputrapersada01@gmail.com" },
+];
+
+const faqs = [
+  { question: "Berapa waktu pengiriman material?", answer: "Waktu pengiriman menyesuaikan lokasi dan jenis material. Hubungi tim kami untuk mendiskusikan jadwal proyek Anda." },
+  { question: "Bagaimana cara mengetahui ketersediaan produk?", answer: "Hubungi kami melalui WhatsApp atau telepon untuk mendapatkan informasi ketersediaan terbaru." },
+  { question: "Bagaimana cara melakukan pemesanan?", answer: "Sampaikan jenis material, jumlah, dan lokasi pengiriman kepada tim kami melalui formulir atau kontak yang tersedia." },
+  { question: "Apakah tersedia konsultasi?", answer: "Silakan hubungi tim kami untuk mendiskusikan pilihan material yang sesuai dengan kebutuhan proyek Anda." },
+];
 
 export default function KontakPage() {
-  const [formStatus, setFormStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [formStatus, setFormStatus] = useState<"idle" | "success">("idle");
+  const [productName, setProductName] = useState("");
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setFormStatus("loading");
+  useEffect(() => {
+    const product = new URLSearchParams(window.location.search).get("produk");
+    if (product) setProductName(product);
+  }, []);
 
-    const formData = new FormData(e.currentTarget);
-    const data = Object.fromEntries(formData);
-
-    try {
-      // Simulate API call - replace with actual endpoint
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      setFormStatus("success");
-      (e.target as HTMLFormElement).reset();
-      setTimeout(() => setFormStatus("idle"), 3000);
-    } catch (error) {
-      setFormStatus("error");
-      setTimeout(() => setFormStatus("idle"), 3000);
-    }
-  };
-
-  const contactInfo = [
-    {
-      icon: "📍",
-      title: "Lokasi Kantor",
-      content: "Jl. Soekarno Hatta - By Pass No. 6 F, Kaduagung Tengah, Kec. Cinangka, Kab. Lebak, Prov. Banten",
-      link: "https://maps.google.com/?q=Jl.+Soekarno+Hatta+-+By+Pass+No.+6+F,+Kaduagung+Tengah,+Cinangka,+Kab.+Lebak,+Banten",
-    },
-    {
-      icon: "📞",
-      title: "Telepon",
-      content: "0812-1832-7779",
-      link: "tel:081218327779",
-    },
-    {
-      icon: "📧",
-      title: "Email",
-      content: "mandalaputrapersada01@gmail.com",
-      link: "mailto:mandalaputrapersada01@gmail.com",
-    },
-    {
-      icon: "🌐",
-      title: "Website",
-      content: "mandalapersada.vercel.app",
-      link: "https://mandalapersada.vercel.app",
-    },
-  ];
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6 },
-    },
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const message = [
+      "Halo PT. Mandala Putra Persada, saya ingin berkonsultasi.",
+      "",
+      `Nama: ${formData.get("name")}`,
+      `Email: ${formData.get("email")}`,
+      `Telepon: ${formData.get("phone")}`,
+      `Kebutuhan: ${formData.get("subject")}`,
+      `Pesan: ${formData.get("message")}`,
+    ].join("\n");
+    const whatsappUrl = `https://wa.me/6281218327779?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+    setFormStatus("success");
   };
 
   return (
-    <main className="bg-white overflow-hidden transition-colors duration-300 dark:bg-slate-900">
-      {/* Header Section */}
-      <section className="relative pt-20 pb-12 px-4 md:px-6 bg-gradient-to-b from-slate-50 to-white transition-colors duration-300 dark:from-slate-800 dark:to-slate-900">
-        <div className="absolute inset-0 -z-10 overflow-hidden">
-          <div className="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-br from-cyan-200 to-blue-200 rounded-full blur-3xl opacity-20" />
-        </div>
-
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            className="text-center"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-slate-900 dark:text-white">
-              <span className="block mb-2">Hubungi Kami</span>
-              <span className="gradient-text">Mari Berkolaborasi Bersama</span>
+    <main className="page-shell">
+      <section className="px-5 pb-12 pt-16 md:px-8 md:pb-16 md:pt-24">
+        <div className="mx-auto max-w-7xl">
+          <div className="max-w-3xl">
+            <p className="eyebrow text-xs font-bold uppercase tracking-[0.22em]">Hubungi kami</p>
+            <h1 className="mt-4 text-4xl font-semibold leading-tight tracking-tight sm:text-5xl md:text-6xl">
+              Mari bicarakan
+              <span className="accent-text"> proyek Anda.</span>
             </h1>
-            <p className="text-gray-600 max-w-2xl mx-auto text-lg dark:text-gray-300">
-              Kami siap membantu Anda dengan konsultasi gratis dan solusi material konstruksi terbaik untuk proyek Anda
+            <p className="text-muted mt-5 max-w-2xl leading-7">
+              Sampaikan kebutuhan material Anda. Tim kami siap membantu menjawab pertanyaan dan mendiskusikan langkah selanjutnya.
             </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Contact Info Cards */}
-      <section className="py-16 px-4 md:px-6">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            {contactInfo.map((info, idx) => (
+          </div>
+          <div className="mt-10 grid gap-3 md:grid-cols-3">
+            {contactItems.map((item, index) => (
               <motion.a
-                key={idx}
-                href={info.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group p-6 rounded-xl bg-gradient-to-br from-slate-50 to-white border-2 border-slate-200 hover:border-cyan-500 transition-all duration-300 card-hover cursor-pointer dark:from-slate-800 dark:to-slate-700 dark:border-slate-700"
-                variants={itemVariants}
+                key={item.label}
+                href={item.href}
+                target={item.href.startsWith("http") ? "_blank" : undefined}
+                rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.35, delay: index * 0.07 }}
+                className="surface-card group rounded-2xl p-5 transition hover:-translate-y-0.5 hover:shadow-lg sm:p-6"
               >
-                <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                  {info.icon}
-                </div>
-                <h3 className="font-bold text-slate-900 mb-2 text-lg dark:text-white">{info.title}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed group-hover:text-cyan-600 transition-colors duration-300 dark:text-gray-300">
-                  {info.content}
-                </p>
+                <span className="accent-text flex h-10 w-10 items-center justify-center rounded-full bg-[color-mix(in_srgb,var(--accent)_12%,transparent)] text-lg">{item.icon}</span>
+                <p className="text-muted mt-5 text-xs font-medium uppercase tracking-wider">{item.label}</p>
+                <p className="mt-2 break-words text-sm font-semibold leading-6 group-hover:text-[var(--accent-dark)]">{item.value}</p>
               </motion.a>
             ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Main Contact Section */}
-      <section className="py-20 px-4 md:px-6 bg-gradient-to-b from-white to-slate-50 transition-colors duration-300 dark:from-slate-900 dark:to-slate-800">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12">
-            {/* Contact Form */}
-            <motion.div
-              className="order-2 md:order-1"
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
-              <h2 className="text-3xl font-bold text-slate-900 mb-2 dark:text-white">Kirim Pesan Anda</h2>
-              <p className="text-gray-600 mb-8 dark:text-gray-300">
-                Kami akan merespons pesan Anda dalam 24 jam kerja
-              </p>
-
-              <form onSubmit={handleSubmit} className="space-y-6">
-                {/* Name */}
-                <div>
-                  <label htmlFor="name" className="block text-sm font-semibold text-slate-900 mb-2 dark:text-gray-200">
-                    Nama Lengkap
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    required
-                    className="w-full px-4 py-3 rounded-lg border-2 border-slate-200 focus:border-cyan-500 focus:outline-none transition-colors duration-300"
-                    placeholder="Masukkan nama Anda"
-                  />
-                </div>
-
-                {/* Email */}
-                <div>
-                  <label htmlFor="email" className="block text-sm font-semibold text-slate-900 mb-2">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    required
-                    className="w-full px-4 py-3 rounded-lg border-2 border-slate-200 focus:border-cyan-500 focus:outline-none transition-colors duration-300"
-                    placeholder="nama@email.com"
-                  />
-                </div>
-
-                {/* Phone */}
-                <div>
-                  <label htmlFor="phone" className="block text-sm font-semibold text-slate-900 mb-2">
-                    Nomor Telepon
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    required
-                    className="w-full px-4 py-3 rounded-lg border-2 border-slate-200 focus:border-cyan-500 focus:outline-none transition-colors duration-300"
-                    placeholder="08XX-XXXX-XXXX"
-                  />
-                </div>
-
-                {/* Subject */}
-                <div>
-                  <label htmlFor="subject" className="block text-sm font-semibold text-slate-900 mb-2">
-                    Subjek
-                  </label>
-                  <input
-                    type="text"
-                    id="subject"
-                    name="subject"
-                    required
-                    className="w-full px-4 py-3 rounded-lg border-2 border-slate-200 focus:border-cyan-500 focus:outline-none transition-colors duration-300"
-                    placeholder="Subjek pertanyaan Anda"
-                  />
-                </div>
-
-                {/* Message */}
-                <div>
-                  <label htmlFor="message" className="block text-sm font-semibold text-slate-900 mb-2">
-                    Pesan
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    required
-                    rows={5}
-                    className="w-full px-4 py-3 rounded-lg border-2 border-slate-200 bg-white text-slate-900 focus:border-cyan-500 focus:outline-none transition-colors duration-300 resize-none dark:border-slate-700 dark:bg-slate-800 dark:text-white"
-                    placeholder="Tuliskan pesan atau pertanyaan Anda..."
-                  />
-                </div>
-
-                {/* Status Messages */}
-                {formStatus === "success" && (
-                  <div className="p-4 bg-green-50 border-2 border-green-500 text-green-700 rounded-lg font-semibold">
-                    ✓ Pesan berhasil dikirim! Kami akan menghubungi Anda segera.
-                  </div>
-                )}
-                {formStatus === "error" && (
-                  <div className="p-4 bg-red-50 border-2 border-red-500 text-red-700 rounded-lg font-semibold">
-                    ✗ Terjadi kesalahan. Silakan coba lagi.
-                  </div>
-                )}
-
-                {/* Submit Button */}
-                <button
-                  type="submit"
-                  disabled={formStatus === "loading"}
-                  className="w-full py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold rounded-lg hover:from-cyan-400 hover:to-blue-500 disabled:opacity-50 transition-all duration-300 shadow-lg hover:shadow-xl"
-                >
-                  {formStatus === "loading" ? "Mengirim..." : "Kirim Pesan"}
-                </button>
-              </form>
-            </motion.div>
-
-            {/* Map & Quick Contact */}
-            <motion.div
-              className="order-1 md:order-2 space-y-6"
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
-              {/* Google Maps */}
-              <div className="rounded-2xl overflow-hidden shadow-lg h-96">
-                <iframe
-                  title="Lokasi Kantor PT. Mandala Putra Persada"
-                  className="w-full h-full border-0"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3962.8467862261166!2d106.26638572503!3d-6.304881522093639!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e422de6b1f7f0e5%3A0x1f1f1f1f1f1f1f1f!2sJl.%20Soekarno%20Hatta%20-%20By%20Pass%20No.%206%20F%2C%20Kaduagung%20Tengah!5e0!3m2!1sid!2sid!4v1234567890123"
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                />
-              </div>
-
-              {/* Quick Contact Card */}
-              <div className="bg-gradient-to-br from-cyan-600 to-blue-600 text-white rounded-2xl p-8 shadow-lg">
-                <h3 className="text-2xl font-bold mb-4">Hubungi Kami Langsung</h3>
-                <p className="text-cyan-50 mb-6">
-                  Untuk pertanyaan mendesak, hubungi kami melalui WhatsApp atau telepon
-                </p>
-
-                <div className="space-y-4">
-                  <a
-                    href="https://wa.me/081218327779"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-3 p-4 bg-white/20 rounded-lg hover:bg-white/30 transition-all duration-300 font-semibold"
-                  >
-                    <span className="text-2xl">💬</span>
-                    <div>
-                      <div>WhatsApp</div>
-                      <div className="text-sm text-cyan-100">0812-1832-7779</div>
-                    </div>
-                  </a>
-
-                  <a
-                    href="tel:081218327779"
-                    className="flex items-center gap-3 p-4 bg-white/20 rounded-lg hover:bg-white/30 transition-all duration-300 font-semibold"
-                  >
-                    <span className="text-2xl">📞</span>
-                    <div>
-                      <div>Telepon</div>
-                      <div className="text-sm text-cyan-100">0812-1832-7779</div>
-                    </div>
-                  </a>
-
-                  <a
-                    href="mailto:mandalaputrapersada01@gmail.com"
-                    className="flex items-center gap-3 p-4 bg-white/20 rounded-lg hover:bg-white/30 transition-all duration-300 font-semibold"
-                  >
-                    <span className="text-2xl">📧</span>
-                    <div>
-                      <div>Email</div>
-                      <div className="text-sm text-cyan-100">mandalaputrapersada01@gmail.com</div>
-                    </div>
-                  </a>
-                </div>
-
-                {/* Business Hours */}
-                <div className="mt-8 pt-8 border-t border-white/20">
-                  <h4 className="font-semibold mb-3">Jam Operasional</h4>
-                  <div className="space-y-2 text-sm">
-                    <p>Senin - Jumat: 08:00 - 17:00</p>
-                    <p>Sabtu: 08:00 - 14:00</p>
-                    <p>Minggu & Hari Libur: Tutup</p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="py-20 px-4 md:px-6 bg-slate-50 transition-colors duration-300 dark:bg-slate-800">
-        <div className="max-w-4xl mx-auto">
-          <motion.div
-            className="text-center mb-12"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Pertanyaan Umum</h2>
-            <div className="w-16 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full mx-auto" />
-          </motion.div>
+      <section className="soft-section px-5 py-14 md:px-8 md:py-20">
+        <div className="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[1.05fr_0.95fr]">
+          <div className="surface-card rounded-[1.75rem] p-6 sm:p-9">
+            <p className="eyebrow text-xs font-bold uppercase tracking-[0.22em]">Kirim pertanyaan</p>
+            <h2 className="mt-3 text-2xl font-semibold tracking-tight sm:text-3xl">Ceritakan kebutuhan Anda.</h2>
+            <p className="text-muted mt-2 text-sm leading-6">Formulir ini akan menyiapkan pesan untuk dikirim melalui WhatsApp.</p>
 
-          <motion.div
-            className="space-y-4"
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            {[
-              {
-                q: "Berapa waktu pengiriman material?",
-                a: "Pengiriman biasanya memakan waktu 1-3 hari kerja tergantung lokasi dan jenis material yang dipesan.",
-              },
-              {
-                q: "Apakah ada biaya pengiriman?",
-                a: "Kami menawarkan gratis ongkir untuk pembelian minimal tertentu ke area Jabodetabek.",
-              },
-              {
-                q: "Bagaimana cara melakukan pemesanan?",
-                a: "Hubungi kami melalui telepon, WhatsApp, atau email untuk mendiskusikan kebutuhan Anda.",
-              },
-              {
-                q: "Apakah tersedia konsultasi gratis?",
-                a: "Ya, kami menyediakan konsultasi gratis untuk membantu Anda memilih material yang tepat.",
-              },
-            ].map((faq, idx) => (
-              <motion.div
-                key={idx}
-                className="p-6 bg-white rounded-lg border-2 border-slate-200 hover:border-cyan-500 transition-colors duration-300 dark:bg-slate-700 dark:border-slate-600"
-                variants={itemVariants}
-              >
-                <h3 className="font-bold text-slate-900 mb-2 text-lg dark:text-white">❓ {faq.q}</h3>
-                <p className="text-gray-600 dark:text-gray-300">{faq.a}</p>
-              </motion.div>
+            <form onSubmit={handleSubmit} className="mt-7 space-y-5">
+              <div className="grid gap-5 sm:grid-cols-2">
+                <div>
+                  <label htmlFor="name" className="mb-2 block text-sm font-medium">Nama lengkap</label>
+                  <input id="name" name="name" type="text" autoComplete="name" required placeholder="Nama Anda" className="w-full rounded-xl border border-[var(--line)] bg-[var(--background)] px-4 py-3 text-sm transition placeholder:text-muted focus:border-[var(--accent)] focus:outline-none" />
+                </div>
+                <div>
+                  <label htmlFor="email" className="mb-2 block text-sm font-medium">Email</label>
+                  <input id="email" name="email" type="email" autoComplete="email" required placeholder="nama@email.com" className="w-full rounded-xl border border-[var(--line)] bg-[var(--background)] px-4 py-3 text-sm transition placeholder:text-muted focus:border-[var(--accent)] focus:outline-none" />
+                </div>
+              </div>
+              <div className="grid gap-5 sm:grid-cols-2">
+                <div>
+                  <label htmlFor="phone" className="mb-2 block text-sm font-medium">Nomor telepon</label>
+                  <input id="phone" name="phone" type="tel" autoComplete="tel" required placeholder="08xx xxxx xxxx" className="w-full rounded-xl border border-[var(--line)] bg-[var(--background)] px-4 py-3 text-sm transition placeholder:text-muted focus:border-[var(--accent)] focus:outline-none" />
+                </div>
+                <div>
+                  <label htmlFor="subject" className="mb-2 block text-sm font-medium">Kebutuhan material</label>
+                  <input id="subject" name="subject" type="text" required value={productName} onChange={(event) => setProductName(event.target.value)} placeholder="Contoh: batu split" className="w-full rounded-xl border border-[var(--line)] bg-[var(--background)] px-4 py-3 text-sm transition placeholder:text-muted focus:border-[var(--accent)] focus:outline-none" />
+                </div>
+              </div>
+              <div>
+                <label htmlFor="message" className="mb-2 block text-sm font-medium">Pesan</label>
+                <textarea id="message" name="message" required rows={4} placeholder="Ceritakan kebutuhan atau pertanyaan Anda..." className="w-full resize-y rounded-xl border border-[var(--line)] bg-[var(--background)] px-4 py-3 text-sm transition placeholder:text-muted focus:border-[var(--accent)] focus:outline-none" />
+              </div>
+
+              {formStatus === "success" && (
+                <p role="status" className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-700 dark:text-emerald-300">
+                  Draf pesan siap. Tinjau dan kirim melalui WhatsApp; jika tab baru tidak terbuka, gunakan tautan chat langsung di samping.
+                </p>
+              )}
+              <button type="submit" className="accent-button inline-flex w-full items-center justify-center gap-3 rounded-full px-6 py-3.5 text-sm font-semibold transition hover:-translate-y-0.5 sm:w-auto">
+                Lanjutkan ke WhatsApp <span aria-hidden="true">↗</span>
+              </button>
+            </form>
+          </div>
+
+          <div className="flex flex-col gap-5">
+            <div className="surface-card relative min-h-[300px] flex-1 overflow-hidden rounded-[1.75rem]">
+              <iframe
+                title="Lokasi PT. Mandala Putra Persada di Google Maps"
+                className="absolute inset-0 h-full w-full border-0 grayscale-[0.25]"
+                src="https://maps.google.com/maps?q=Jl.%20Soekarno%20Hatta%20By%20Pass%20No.%206%20F%2C%20Kaduagung%20Tengah%2C%20Lebak%2C%20Banten&t=&z=14&ie=UTF8&iwloc=&output=embed"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
+            <div className="rounded-[1.75rem] bg-[#263b32] p-6 text-white sm:p-8">
+              <div className="flex items-start justify-between gap-5">
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#e39860]">Jam operasional</p>
+                  <h2 className="mt-2 text-xl font-semibold">Kami siap membantu.</h2>
+                </div>
+                <span className="rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs text-white/75">Waktu Indonesia</span>
+              </div>
+              <div className="mt-6 space-y-3 text-sm text-white/75">
+                <div className="flex justify-between gap-4 border-b border-white/10 pb-3"><span>Senin – Jumat</span><span>08.00 – 17.00</span></div>
+                <div className="flex justify-between gap-4 border-b border-white/10 pb-3"><span>Sabtu</span><span>08.00 – 14.00</span></div>
+                <div className="flex justify-between gap-4"><span>Minggu & hari libur</span><span>Tutup</span></div>
+              </div>
+              <a href="https://wa.me/6281218327779" target="_blank" rel="noopener noreferrer" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#efb17f] transition hover:gap-3">
+                Chat langsung di WhatsApp <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="px-5 py-16 md:px-8 md:py-20">
+        <div className="mx-auto max-w-4xl">
+          <div className="mb-8">
+            <p className="eyebrow text-xs font-bold uppercase tracking-[0.22em]">Bantuan</p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight">Pertanyaan yang sering diajukan.</h2>
+          </div>
+          <div className="space-y-3">
+            {faqs.map((faq) => (
+              <details key={faq.question} className="surface-card group rounded-2xl p-5 sm:p-6">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-5 text-sm font-semibold sm:text-base">
+                  {faq.question}
+                  <span className="accent-text text-xl transition group-open:rotate-45" aria-hidden="true">+</span>
+                </summary>
+                <p className="text-muted mt-4 max-w-3xl border-t border-[var(--line)] pt-4 text-sm leading-7">{faq.answer}</p>
+              </details>
             ))}
-          </motion.div>
+          </div>
+          <p className="text-muted mt-8 text-sm">
+            Masih ada pertanyaan? <Link href="/produk" className="accent-text font-semibold hover:underline">Lihat katalog produk</Link> atau hubungi tim kami.
+          </p>
         </div>
       </section>
     </main>

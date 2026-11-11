@@ -1,394 +1,176 @@
 "use client";
 
-import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { useTheme } from "@/components/ThemeContext";
+import { motion } from "framer-motion";
+
+const products = [
+  { name: "Batu belah", image: "/batu-belah.jpg", detail: "Pondasi dan konstruksi" },
+  { name: "Batu split", image: "/split.jpg", detail: "Beton dan infrastruktur" },
+  { name: "Pasir pilihan", image: "/pasir.png", detail: "Cor dan konstruksi umum" },
+];
+
+const benefits = [
+  {
+    number: "01",
+    title: "Kualitas terjaga",
+    description: "Material pilihan untuk membantu memenuhi kebutuhan dan spesifikasi proyek Anda.",
+  },
+  {
+    number: "02",
+    title: "Pengiriman terkoordinasi",
+    description: "Pengiriman direncanakan bersama tim agar material tiba sesuai kebutuhan lapangan.",
+  },
+  {
+    number: "03",
+    title: "Konsultasi langsung",
+    description: "Diskusikan kebutuhan, jenis material, serta rencana pengiriman bersama tim kami.",
+  },
+];
+
+const rise = {
+  hidden: { opacity: 0, y: 22 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: "easeOut" as const } },
+};
 
 export default function HomePage() {
-  const { theme } = useTheme();
-  const isDark = theme === "dark";
-  const features = [
-    {
-      id: 1,
-      icon: (
-        <svg className="w-12 h-12 text-cyan-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-      ),
-      title: "Material Berkualitas Premium",
-      description: "Semua material telah melewati quality check ketat sesuai standar nasional dan internasional.",
-    },
-    {
-      id: 2,
-      icon: (
-        <svg className="w-12 h-12 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
-        </svg>
-      ),
-      title: "Pengiriman Cepat & Tepat",
-      description: "Armada profesional siap mengantarkan material Anda ke lokasi proyek dengan aman dan tepat waktu.",
-    },
-    {
-      id: 3,
-      icon: (
-        <svg className="w-12 h-12 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
-        </svg>
-      ),
-      title: "Konsultasi Teknis Gratis",
-      description: "Tim ahli kami siap memberikan solusi terbaik sesuai spesifikasi dan kebutuhan proyek Anda.",
-    },
-  ];
-
-  const stats = [
-    { number: "500+", label: "Proyek Selesai" },
-    { number: "1000+", label: "Klien Puas" },
-    { number: "15+", label: "Tahun Berpengalaman" },
-  ];
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.8 },
-    },
-  };
-
   return (
-    <main className={`overflow-hidden transition-colors duration-300 ${isDark ? 'dark bg-slate-900' : 'bg-white'}`}>
-      {/* Hero Section */}
-      <section className={`relative pt-20 pb-32 md:pt-32 md:pb-48 px-4 md:px-6 transition-colors duration-300 ${isDark ? 'dark bg-slate-900' : 'bg-white'}`}>
-        {/* Background decorations */}
-        <div className="absolute inset-0 -z-10 overflow-hidden">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-cyan-200 via-blue-200 to-purple-200 rounded-full blur-3xl opacity-30 animate-blob" />
-          <div className="absolute bottom-0 left-0 w-72 h-72 bg-gradient-to-tr from-blue-200 to-cyan-200 rounded-full blur-3xl opacity-20 animate-blob" style={{ animationDelay: "2s" }} />
-        </div>
-
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            className="text-center"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            {/* Logo Badge */}
-            <motion.div
-              className="inline-flex items-center gap-2 bg-cyan-100 text-cyan-700 px-4 py-2 rounded-full font-semibold text-sm mb-6"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2 }}
-            >
-              <span className="w-2 h-2 bg-cyan-500 rounded-full animate-pulse" />
-              Solusi Material Konstruksi Terpercaya
-            </motion.div>
-
-            {/* Main Heading */}
-            <h1 className={`text-4xl md:text-6xl font-bold mb-6 leading-tight transition-colors duration-300 ${isDark ? 'dark text-white' : 'text-slate-900'}`}>
-              <span className="block mb-2">PT. Mandala Putra</span>
-              <span className="gradient-text">Persada</span>
-            </h1>
-
-            {/* Tagline */}
-            <p className={`text-lg md:text-xl mb-8 max-w-2xl mx-auto leading-relaxed transition-colors duration-300 ${isDark ? 'dark text-gray-400' : 'text-gray-600'}`}>
-              Kami menyediakan material konstruksi berkualitas tinggi dengan layanan profesional untuk mendukung kesuksesan setiap proyek Anda.
-            </p>
-
-            {/* CTA Buttons */}
-            <motion.div
-              className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-            >
-              <Link href="/produk" className="btn-primary">
-                Lihat Produk Kami
-              </Link>
-              <Link href="/kontak" className="btn-secondary">
-                Hubungi Tim Kami
-              </Link>
-            </motion.div>
-
-            {/* Hero Image */}
-            <motion.div
-              className="relative max-w-2xl mx-auto"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.6, duration: 0.8 }}
-            >
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-                <Image
-                  src="/hero.png"
-                  alt="PT Mandala Putra Persada - Material Konstruksi Profesional"
-                  width={350}
-                  height={280}
-                  className="w-full h-auto object-cover"
-                  priority
-                  unoptimized
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl" />
+    <main className="page-shell overflow-hidden">
+      <section className="px-5 pb-16 pt-8 md:px-8 md:pb-24 md:pt-12">
+        <div className="relative mx-auto min-h-[620px] max-w-7xl overflow-hidden rounded-[2rem] bg-[#263b32] md:min-h-[680px]">
+          <Image
+            src="/split.jpg"
+            alt="Material dan kegiatan konstruksi PT. Mandala Putra Persada"
+            fill
+            priority
+            sizes="(max-width: 768px) 100vw, 1280px"
+            className="object-cover object-center opacity-75"
+          />
+          <div className="hero-photo absolute inset-0" />
+          <div className="relative z-10 flex min-h-[620px] max-w-3xl flex-col justify-center px-6 py-16 text-white sm:px-12 md:min-h-[680px] md:px-16">
+            <motion.div initial="hidden" animate="visible" variants={rise}>
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-2 text-xs font-medium tracking-wide text-white/90 backdrop-blur-md">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#e39860]" />
+                Mitra material konstruksi Anda
+              </span>
+              <h1 className="mt-7 max-w-3xl text-4xl font-semibold leading-[1.08] tracking-tight sm:text-5xl md:text-7xl">
+                Fondasi kuat
+                <br />
+                <span className="text-[#efb17f]">dimulai dari sini.</span>
+              </h1>
+              <p className="mt-6 max-w-xl text-base leading-7 text-white/78 sm:text-lg sm:leading-8">
+                PT. Mandala Putra Persada menyediakan material konstruksi untuk membantu proyek berjalan dengan tepat, dari awal hingga selesai.
+              </p>
+              <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+                <Link href="/produk" className="accent-button inline-flex items-center justify-center gap-3 rounded-full px-6 py-3.5 text-sm font-semibold shadow-lg shadow-black/10 transition hover:-translate-y-0.5">
+                  Jelajahi produk <span aria-hidden="true">→</span>
+                </Link>
+                <Link href="/kontak" className="inline-flex items-center justify-center rounded-full border border-white/40 bg-white/10 px-6 py-3.5 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/20">
+                  Konsultasi proyek
+                </Link>
               </div>
-              <div className="absolute -inset-4 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 rounded-2xl blur-2xl opacity-20 -z-10 animate-glow-pulse" />
             </motion.div>
-          </motion.div>
+            <div className="absolute bottom-7 left-6 flex items-center gap-3 text-xs text-white/65 sm:left-12 md:bottom-10 md:left-16">
+              <span className="h-px w-9 bg-[#e39860]" />
+              Melayani kebutuhan material konstruksi
+            </div>
+          </div>
+          <div className="absolute bottom-8 right-8 hidden rounded-2xl border border-white/20 bg-[#1e2b24]/70 px-5 py-4 text-white backdrop-blur-lg lg:block">
+            <p className="text-xs text-white/60">Beragam kebutuhan</p>
+            <p className="mt-1 text-lg font-semibold">Satu mitra tepercaya</p>
+          </div>
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-16 px-4 md:px-6 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            className="grid grid-cols-1 md:grid-cols-3 gap-8"
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-          >
-            {stats.map((stat, idx) => (
-              <motion.div
-                key={idx}
-                className="text-center"
-                variants={itemVariants}
-              >
-                <div className="text-4xl md:text-5xl font-bold text-cyan-400 mb-2">
-                  {stat.number}
-                </div>
-                <p className="text-gray-300 text-lg">{stat.label}</p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Features Section */}
-      <section className={`py-20 px-4 md:px-6 transition-colors duration-300 ${isDark ? 'dark bg-slate-800' : 'bg-white'}`}>
-        <div className="max-w-6xl mx-auto">
-          {/* Section Header */}
-          <motion.div
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className={`text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent`}>Keunggulan Kami</h2>
-            <div className="w-16 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full mx-auto mb-4" />
-            <p className={`max-w-2xl mx-auto text-lg transition-colors duration-300 ${isDark ? 'dark text-gray-300' : 'text-gray-600'}`}>
-              Kami berkomitmen memberikan layanan terbaik dengan produk berkualitas tinggi
-            </p>
-          </motion.div>
-
-          {/* Features Grid */}
-          <motion.div
-            className="grid grid-cols-1 md:grid-cols-3 gap-8"
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-          >
-            {features.map((feature) => (
-              <motion.div
-                key={feature.id}
-                className={`p-8 rounded-2xl bg-gradient-to-br border transition-colors duration-300 card-hover group ${
-                  isDark
-                    ? 'dark from-slate-700 to-slate-600 border-slate-600 hover:border-cyan-500'
-                    : 'from-slate-50 to-white border-slate-200'
-                }`}
-                variants={itemVariants}
-              >
-                {/* Icon Background */}
-                <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-cyan-100 to-blue-100 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                  {feature.icon}
-                </div>
-
-                {/* Content */}
-                <h3 className={`text-xl font-bold mb-3 transition-colors duration-300 ${isDark ? 'dark text-white' : 'text-slate-900'}`}>
-                  {feature.title}
-                </h3>
-                <p className={`leading-relaxed transition-colors duration-300 ${isDark ? 'dark text-gray-300' : 'text-gray-600'}`}>
-                  {feature.description}
-                </p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Testimonials Section */}
-      <section className={`py-20 px-4 md:px-6 transition-colors duration-300 ${isDark ? 'dark bg-slate-900' : 'bg-gradient-to-b from-slate-50 to-white'}`}>
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className={`text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent`}>Testimoni Klien Kami</h2>
-            <div className="w-16 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full mx-auto mb-4" />
-            <p className={`max-w-2xl mx-auto text-lg transition-colors duration-300 ${isDark ? 'dark text-gray-300' : 'text-gray-600'}`}>
-              Kepuasan klien adalah prioritas utama kami, dan kami bangga dengan reputasi yang telah dibangun
-            </p>
-          </motion.div>
-
-          <motion.div
-            className="grid md:grid-cols-3 gap-8"
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-          >
-            {[
-              {
-                name: "PT. Sinar Konstruksi",
-                role: "Project Manager",
-                content: "Layanan PT. Mandala Putra Persada sangat profesional. Material berkualitas tinggi dan pengiriman selalu tepat waktu.",
-                rating: 5,
-              },
-              {
-                name: "CV. Bangunan Jaya",
-                role: "Direktur Operasional",
-                content: "Sudah bekerja sama selama 8 tahun. Konsistensi kualitas dan pelayanan yang luar biasa membuat kami terus mempercayai mereka.",
-                rating: 5,
-              },
-              {
-                name: "PT. Infrastruktur Indonesia",
-                role: "Procurement Officer",
-                content: "Harga yang kompetitif dan dukungan teknis yang excellent membuat pekerjaan proyek kami menjadi lebih efisien.",
-                rating: 5,
-              },
-            ].map((testimonial, idx) => (
-              <motion.div
-                key={idx}
-                className={`p-8 rounded-2xl shadow-lg border transition-colors duration-300 card-hover ${
-                  isDark
-                    ? 'dark bg-slate-700 border-slate-600'
-                    : 'bg-white border-gray-200'
-                }`}
-                variants={itemVariants}
-              >
-                <div className="flex gap-1 mb-4">
-                  {Array(testimonial.rating)
-                    .fill(0)
-                    .map((_, i) => (
-                      <span key={i} className="text-yellow-400 text-xl">
-                        ★
-                      </span>
-                    ))}
-                </div>
-                <p className={`mb-6 leading-relaxed italic transition-colors duration-300 ${isDark ? 'dark text-gray-200' : 'text-gray-700'}`}>
-                  "{testimonial.content}"
-                </p>
-                <div className={`border-t pt-4 transition-colors duration-300 ${isDark ? 'dark border-slate-600' : 'border-gray-200'}`}>
-                  <h4 className={`font-bold transition-colors duration-300 ${isDark ? 'dark text-white' : 'text-slate-900'}`}>{testimonial.name}</h4>
-                  <p className="text-sm text-cyan-600">{testimonial.role}</p>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Team Section */}
-      <section className={`py-20 px-4 md:px-6 transition-colors duration-300 ${isDark ? 'dark bg-slate-800' : 'bg-gradient-to-b from-white to-slate-50'}`}>
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className={`text-3xl md:text-4xl font-bold mb-4 transition-colors duration-300 ${isDark ? 'dark text-white' : 'text-slate-900'}`}>Tim Profesional Kami</h2>
-            <div className="w-16 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full mx-auto mb-4" />
-            <p className={`max-w-2xl mx-auto text-lg transition-colors duration-300 ${isDark ? 'dark text-gray-300' : 'text-gray-600'}`}>
-              Tim berpengalaman dan berdedikasi siap memberikan solusi terbaik untuk kebutuhan Anda
-            </p>
-          </motion.div>
-
-          <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-          >
-            {[
-              {
-                name: "Budi Santoso",
-                role: "Direktur Utama",
-                icon: "👔",
-              },
-              {
-                name: "Siti Nurhaliza",
-                role: "Manager Operasional",
-                icon: "💼",
-              },
-              {
-                name: "Roni Suryanto",
-                role: "Kepala Distribusi",
-                icon: "🚚",
-              },
-              {
-                name: "Dewi Lestari",
-                role: "Customer Service",
-                icon: "📞",
-              },
-            ].map((team, idx) => (
-              <motion.div
-                key={idx}
-                className={`p-8 rounded-2xl shadow-lg border text-center card-hover group transition-colors duration-300 ${
-                  isDark
-                    ? 'dark bg-slate-700 border-slate-600'
-                    : 'bg-white border-gray-200'
-                }`}
-                variants={itemVariants}
-              >
-                <div className="text-5xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                  {team.icon}
-                </div>
-                <h3 className={`text-xl font-bold mb-2 transition-colors duration-300 ${isDark ? 'dark text-white' : 'text-slate-900'}`}>{team.name}</h3>
-                <p className="text-cyan-600 font-semibold text-sm">{team.role}</p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className={`py-20 px-4 md:px-6 transition-colors duration-300 ${isDark ? 'dark bg-slate-900' : 'bg-gradient-to-r from-cyan-600 to-blue-600'}`}>
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className={`text-3xl md:text-4xl font-bold mb-6 transition-colors duration-300 ${isDark ? 'dark text-white' : 'text-white'}`}>
-              Siap untuk Memulai Proyek Anda?
+      <section className="px-5 pb-20 md:px-8 md:pb-28">
+        <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-[0.8fr_1.2fr] md:items-end">
+          <div>
+            <p className="eyebrow text-xs font-bold uppercase tracking-[0.22em]">Kenali MPP</p>
+            <h2 className="mt-4 max-w-md text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">
+              Material yang sesuai. Layanan yang bisa diandalkan.
             </h2>
-            <p className={`text-lg mb-8 max-w-2xl mx-auto transition-colors duration-300 ${isDark ? 'dark text-gray-300' : 'text-cyan-50'}`}>
-              Hubungi tim kami hari ini untuk mendapatkan konsultasi gratis dan penawaran terbaik untuk material konstruksi Anda.
+          </div>
+          <div className="md:pl-12">
+            <p className="text-muted max-w-2xl leading-7">
+              Dari batu belah hingga tanah urug, kami menyediakan pilihan material untuk beragam kebutuhan konstruksi. Tim kami siap membantu Anda menentukan langkah berikutnya.
             </p>
-            <Link
-              href="/kontak"
-              className="inline-block px-8 py-4 bg-white text-blue-600 font-bold rounded-lg hover:bg-gray-50 transition-all duration-300 shadow-lg hover:shadow-xl"
-            >
-              Hubungi Kami Sekarang
+            <Link href="/tentang" className="accent-text mt-5 inline-flex items-center gap-2 text-sm font-semibold hover:gap-3">
+              Tentang perusahaan kami <span aria-hidden="true">→</span>
             </Link>
-          </motion.div>
+          </div>
+        </div>
+      </section>
+
+      <section className="soft-section px-5 py-20 md:px-8 md:py-28">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-10 flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
+            <div>
+              <p className="eyebrow text-xs font-bold uppercase tracking-[0.22em]">Pilihan material</p>
+              <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">Siap mendukung proyek Anda</h2>
+            </div>
+            <Link href="/produk" className="text-sm font-semibold text-[var(--foreground)] transition hover:text-[var(--accent-dark)]">
+              Lihat semua produk <span aria-hidden="true">→</span>
+            </Link>
+          </div>
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {products.map((product, index) => (
+              <motion.div
+                key={product.name}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: "-40px" }}
+                variants={{ ...rise, visible: { ...rise.visible, transition: { ...rise.visible.transition, delay: index * 0.08 } } }}
+                className="group surface-card overflow-hidden rounded-2xl transition duration-300 hover:-translate-y-1 hover:shadow-xl"
+              >
+                <div className="relative h-60 overflow-hidden bg-black/5">
+                  <Image src={product.image} alt={product.name} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover transition duration-700 group-hover:scale-105" />
+                  <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-medium text-[#263b32] backdrop-blur">
+                    Material konstruksi
+                  </span>
+                </div>
+                <div className="flex items-center justify-between gap-4 p-5">
+                  <div>
+                    <h3 className="text-lg font-semibold">{product.name}</h3>
+                    <p className="text-muted mt-1 text-sm">{product.detail}</p>
+                  </div>
+                  <Link href="/kontak" aria-label={`Tanyakan ${product.name}`} className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[var(--line)] transition group-hover:border-[var(--accent)] group-hover:bg-[var(--accent)] group-hover:text-white">
+                    <span aria-hidden="true">↗</span>
+                  </Link>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-5 py-20 md:px-8 md:py-28">
+        <div className="mx-auto max-w-7xl">
+          <div className="max-w-2xl">
+            <p className="eyebrow text-xs font-bold uppercase tracking-[0.22em]">Cara kami bekerja</p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">Sederhana, jelas, terkoordinasi.</h2>
+          </div>
+          <div className="mt-10 grid gap-4 md:grid-cols-3">
+            {benefits.map((benefit) => (
+              <div key={benefit.number} className="surface-card rounded-2xl p-6 sm:p-8">
+                <span className="eyebrow text-sm font-semibold">{benefit.number}</span>
+                <h3 className="mt-8 text-xl font-semibold">{benefit.title}</h3>
+                <p className="text-muted mt-3 text-sm leading-7">{benefit.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-5 pb-20 md:px-8 md:pb-28">
+        <div className="mx-auto flex max-w-7xl flex-col justify-between gap-8 rounded-[2rem] bg-[#263b32] px-7 py-10 text-white sm:px-12 sm:py-14 md:flex-row md:items-center">
+          <div className="max-w-2xl">
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#e39860]">Mulai percakapan</p>
+            <h2 className="mt-3 text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">Ceritakan kebutuhan proyek Anda.</h2>
+            <p className="mt-4 text-sm leading-7 text-white/65">Tim kami siap membantu Anda menemukan material yang tepat.</p>
+          </div>
+          <Link href="/kontak" className="inline-flex shrink-0 items-center justify-center gap-3 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-[#263b32] transition hover:-translate-y-0.5 hover:bg-[#f1eee8]">
+            Hubungi tim kami <span aria-hidden="true">→</span>
+          </Link>
         </div>
       </section>
     </main>

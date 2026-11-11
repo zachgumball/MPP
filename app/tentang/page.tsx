@@ -1,342 +1,141 @@
 "use client";
 
-import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
+import { motion } from "framer-motion";
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-      delayChildren: 0.1,
-    },
-  },
-};
+const timeline = [
+  { year: "2008", title: "Awal perjalanan", description: "PT. Mandala Putra Persada didirikan untuk memenuhi kebutuhan material konstruksi." },
+  { year: "2012", title: "Memperluas jangkauan", description: "Layanan berkembang ke wilayah Jabodetabek dengan dukungan armada distribusi." },
+  { year: "2017", title: "Penguatan kualitas", description: "Perusahaan terus berupaya meningkatkan kualitas material dan layanan pelanggan." },
+  { year: "2023", title: "Layanan digital", description: "Menghadirkan kemudahan digital untuk membantu pelanggan mendapatkan informasi dan layanan." },
+];
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.8 },
-  },
-};
+const values = [
+  { number: "01", title: "Kualitas", description: "Menjaga mutu material dan layanan di setiap tahap." },
+  { number: "02", title: "Efisiensi", description: "Membantu proses pengadaan berjalan lebih jelas dan terkoordinasi." },
+  { number: "03", title: "Kepercayaan", description: "Mengutamakan komunikasi yang terbuka dengan setiap mitra." },
+  { number: "04", title: "Keberlanjutan", description: "Mendukung praktik kerja yang bertanggung jawab terhadap lingkungan." },
+];
 
 export default function TentangPage() {
-  const misiPoints = [
-    {
-      icon: "🎯",
-      title: "Layanan Terbaik",
-      desc: "Memberikan layanan terbaik dengan produk berkualitas tinggi dan pengiriman tepat waktu",
-    },
-    {
-      icon: "🤝",
-      title: "Kemitraan Kuat",
-      desc: "Menjalin kemitraan berkelanjutan dengan pemerintah, swasta, dan masyarakat lokal",
-    },
-    {
-      icon: "⚙️",
-      title: "Profesional & Efisien",
-      desc: "Menerapkan prinsip kerja profesional, efisien, dan inovatif dalam setiap proyek",
-    },
-    {
-      icon: "🌍",
-      title: "Lingkungan Berkelanjutan",
-      desc: "Menjaga kelestarian lingkungan dengan praktik pertambangan yang bertanggung jawab",
-    },
-    {
-      icon: "📈",
-      title: "Pengembangan SDM",
-      desc: "Meningkatkan daya saing melalui pengembangan sumber daya manusia dan teknologi",
-    },
-  ];
-
-  const timeline = [
-    {
-      year: "2008",
-      title: "Awal Perjalanan",
-      desc: "PT. Mandala Putra Persada didirikan sebagai respons terhadap permintaan material konstruksi yang tinggi",
-    },
-    {
-      year: "2012",
-      title: "Ekspansi Bisnis",
-      desc: "Memperluas jangkauan layanan ke wilayah Jabodetabek dengan armada distribusi profesional",
-    },
-    {
-      year: "2017",
-      title: "Sertifikasi Internasional",
-      desc: "Mendapatkan sertifikasi ISO untuk menjamin kualitas material dan layanan pelanggan",
-    },
-    {
-      year: "2023",
-      title: "Inovasi Digital",
-      desc: "Meluncurkan platform digital untuk memudahkan proses pemesanan dan tracking pengiriman",
-    },
-  ];
-
-  const values = [
-    { icon: "💎", title: "Kualitas", desc: "Komitmen pada standar kualitas tertinggi" },
-    { icon: "⚡", title: "Efisiensi", desc: "Layanan cepat dan solusi yang tepat guna" },
-    { icon: "🛡️", title: "Kepercayaan", desc: "Transparansi dalam setiap transaksi bisnis" },
-    { icon: "♻️", title: "Keberlanjutan", desc: "Tanggung jawab terhadap lingkungan" },
-  ];
-
   return (
-    <main className="bg-white overflow-hidden transition-colors duration-300 dark:bg-slate-900">
-      {/* Header Section */}
-      <section className="relative pt-20 pb-16 px-4 md:px-6 bg-gradient-to-b from-slate-50 to-white transition-colors duration-300 dark:from-slate-800 dark:to-slate-900">
-        <div className="absolute inset-0 -z-10 overflow-hidden">
-          <div className="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-br from-cyan-200 to-blue-200 rounded-full blur-3xl opacity-20" />
-          <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-gradient-to-tr from-blue-200 to-cyan-100 rounded-full blur-3xl opacity-20" />
-        </div>
-
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            className="text-center mb-12"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-slate-900 dark:text-white">
-              <span className="block mb-2">Tentang</span>
-              <span className="gradient-text">PT. Mandala Putra Persada</span>
-            </h1>
-            <p className="text-gray-600 max-w-2xl mx-auto text-lg dark:text-gray-300">
-              Kami adalah mitra terpercaya dalam menyediakan solusi material konstruksi berkualitas tinggi
-              untuk mendukung pembangunan infrastruktur nasional yang berkelanjutan.
-            </p>
-          </motion.div>
-
-          {/* Company Image */}
-          <motion.div
-            className="relative rounded-2xl overflow-hidden shadow-2xl mb-8"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-          >
-            <Image
-              src="/hero.png"
-              alt="Kantor PT. Mandala Putra Persada"
-              width={900}
-              height={450}
-              className="w-full h-auto object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-          </motion.div>
-        </div>
-      </section>
-
-      {/* History Section */}
-      <section className="py-16 px-4 md:px-6">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            className="text-center mb-12"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Sejarah Perjalanan Kami</h2>
-            <div className="w-16 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full mx-auto" />
-          </motion.div>
-
-          {/* Timeline */}
-          <div className="space-y-8">
-            {timeline.map((item, idx) => (
-              <motion.div
-                key={item.year}
-                className="flex gap-6 md:gap-12"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-              >
-                {/* Year Marker */}
-                <div className="flex-shrink-0">
-                  <div className="flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 text-white font-bold text-2xl shadow-lg">
-                    {item.year}
-                  </div>
-                </div>
-
-                {/* Content */}
-                <div className="flex-grow pt-4">
-                  <h3 className="text-2xl font-bold text-slate-900 mb-2 dark:text-white">{item.title}</h3>
-                  <p className="text-gray-600 text-lg leading-relaxed dark:text-gray-300">{item.desc}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Vision & Mission Section */}
-      <section className="py-20 px-4 md:px-6 bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12">
-            {/* Vision */}
-            <motion.div
-              className="text-white"
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-            >
-              <div className="inline-flex items-center gap-3 bg-cyan-500/20 px-4 py-2 rounded-full border border-cyan-500/50 mb-6">
-                <span className="text-2xl">🎯</span>
-                <span className="font-semibold text-cyan-300">Visi Kami</span>
-              </div>
-
-              <h3 className="text-3xl font-bold mb-6">
-                Menjadi Pemimpin Industri Material Konstruksi
-              </h3>
-
-              <p className="text-gray-200 text-lg leading-relaxed mb-8">
-                Menjadi perusahaan konstruksi dan pertambangan material terbaik di Indonesia yang terpercaya,
-                unggul dalam kualitas, inovatif, serta berwawasan lingkungan demi mendukung pembangunan
-                nasional yang berkelanjutan.
+    <main className="page-shell">
+      <section className="px-5 pb-20 pt-16 md:px-8 md:pb-28 md:pt-24">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-10 md:grid-cols-[0.85fr_1.15fr] md:items-center">
+            <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }}>
+              <p className="eyebrow text-xs font-bold uppercase tracking-[0.22em]">Tentang perusahaan</p>
+              <h1 className="mt-4 text-4xl font-semibold leading-tight tracking-tight sm:text-5xl md:text-6xl">
+                Mengenal lebih dekat
+                <span className="accent-text"> Mandala Putra Persada.</span>
+              </h1>
+              <p className="text-muted mt-6 max-w-xl leading-7">
+                Kami adalah mitra penyedia material konstruksi yang mendukung pembangunan dengan pilihan produk dan layanan yang dapat diandalkan.
               </p>
-
-              <div className="space-y-4">
-                {["Terpercaya dan Profesional", "Inovatif dan Responsif", "Ramah Lingkungan"].map(
-                  (item, idx) => (
-                    <div key={idx} className="flex items-center gap-3">
-                      <span className="w-2 h-2 bg-cyan-400 rounded-full" />
-                      <span className="text-gray-200">{item}</span>
-                    </div>
-                  )
-                )}
-              </div>
+              <Link href="/kontak" className="accent-button mt-8 inline-flex items-center gap-3 rounded-full px-6 py-3.5 text-sm font-semibold transition hover:-translate-y-0.5">
+                Mari berkolaborasi <span aria-hidden="true">→</span>
+              </Link>
             </motion.div>
-
-            {/* Mission */}
             <motion.div
-              className="text-white"
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.1 }}
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="relative min-h-[320px] overflow-hidden rounded-[2rem] bg-[#263b32] sm:min-h-[430px]"
             >
-              <div className="inline-flex items-center gap-3 bg-blue-500/20 px-4 py-2 rounded-full border border-blue-500/50 mb-6">
-                <span className="text-2xl">💫</span>
-                <span className="font-semibold text-blue-300">Misi Kami</span>
-              </div>
-
-              <h3 className="text-3xl font-bold mb-6">Memberikan Nilai Terbaik</h3>
-
-              <div className="space-y-6">
-                {[
-                  { title: "Kualitas Material", desc: "Menyediakan material berkualitas dengan standar internasional" },
-                  { title: "Layanan Prima", desc: "Pengiriman tepat waktu dan layanan konsultasi profesional" },
-                  { title: "Partnership Solid", desc: "Membangun hubungan jangka panjang dengan semua stakeholder" },
-                ].map((item, idx) => (
-                  <div key={idx} className="bg-slate-700/50 p-4 rounded-lg border border-slate-600">
-                    <h4 className="font-bold text-cyan-300 mb-2">{item.title}</h4>
-                    <p className="text-gray-300 text-sm">{item.desc}</p>
-                  </div>
-                ))}
+              <Image src="/screening.jpg" alt="Material konstruksi PT. Mandala Putra Persada" fill sizes="(max-width: 768px) 100vw, 60vw" className="object-cover" />
+              <div className="hero-photo absolute inset-0" />
+              <div className="absolute bottom-5 left-5 right-5 rounded-2xl border border-white/20 bg-[#1e2b24]/65 p-5 text-white backdrop-blur-md sm:bottom-7 sm:left-7 sm:right-auto sm:max-w-sm">
+                <p className="text-xs uppercase tracking-[0.18em] text-white/60">PT. Mandala Putra Persada</p>
+                <p className="mt-2 text-lg font-medium leading-snug">Bertumbuh bersama kebutuhan pembangunan.</p>
               </div>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Company Values */}
-      <section className="py-20 px-4 md:px-6">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Nilai-Nilai Kami</h2>
-            <div className="w-16 h-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full mx-auto" />
-          </motion.div>
+      <section className="soft-section px-5 py-20 md:px-8 md:py-24">
+        <div className="mx-auto grid max-w-7xl gap-12 md:grid-cols-[0.7fr_1.3fr]">
+          <div className="md:sticky md:top-28 md:self-start">
+            <p className="eyebrow text-xs font-bold uppercase tracking-[0.22em]">Perjalanan kami</p>
+            <h2 className="mt-4 text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">Dibangun dari pengalaman, terus melangkah ke depan.</h2>
+            <p className="text-muted mt-5 text-sm leading-7">
+              Kami terus berkembang untuk menjawab kebutuhan material konstruksi yang berubah dari waktu ke waktu.
+            </p>
+          </div>
+          <div className="relative space-y-4 before:absolute before:bottom-6 before:left-[19px] before:top-6 before:w-px before:bg-[var(--line)]">
+            {timeline.map((item, index) => (
+              <motion.article
+                key={item.year}
+                initial={{ opacity: 0, x: 14 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-30px" }}
+                transition={{ duration: 0.45, delay: index * 0.06 }}
+                className="surface-card relative ml-10 rounded-2xl p-5 sm:ml-12 sm:p-7"
+              >
+                <span className="absolute -left-[41px] top-7 flex h-4 w-4 items-center justify-center rounded-full border-4 border-[var(--background)] bg-[var(--accent)] sm:-left-[49px]">
+                  <span className="sr-only">Tahun {item.year}</span>
+                </span>
+                <span className="eyebrow text-sm font-bold">{item.year}</span>
+                <h3 className="mt-2 text-lg font-semibold">{item.title}</h3>
+                <p className="text-muted mt-2 text-sm leading-6">{item.description}</p>
+              </motion.article>
+            ))}
+          </div>
+        </div>
+      </section>
 
-          <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
+      <section className="bg-[#263b32] px-5 py-20 text-white md:px-8 md:py-24">
+        <div className="mx-auto grid max-w-7xl gap-12 md:grid-cols-2 md:gap-20">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#e39860]">Arah kami</p>
+            <h2 className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">Visi</h2>
+            <p className="mt-5 text-lg leading-8 text-white/75">
+              Menjadi perusahaan penyedia material konstruksi yang terpercaya, unggul dalam kualitas, inovatif, dan bertanggung jawab terhadap lingkungan.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-2">
+              {["Terpercaya", "Profesional", "Bertanggung jawab"].map((item) => (
+                <span key={item} className="rounded-full border border-white/20 px-4 py-2 text-xs text-white/75">{item}</span>
+              ))}
+            </div>
+          </div>
+          <div className="border-t border-white/15 pt-8 md:border-l md:border-t-0 md:pl-12 md:pt-0">
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#e39860]">Yang kami lakukan</p>
+            <h2 className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">Misi</h2>
+            <div className="mt-6 space-y-3">
+              {[
+                ["Material berkualitas", "Menyediakan material yang sesuai dengan kebutuhan konstruksi."],
+                ["Layanan profesional", "Mendukung pengadaan dengan koordinasi dan komunikasi yang baik."],
+                ["Kemitraan berkelanjutan", "Membangun hubungan jangka panjang dengan pelanggan dan mitra."],
+              ].map(([title, description], index) => (
+                <div key={title} className="flex gap-4 rounded-2xl border border-white/10 bg-white/5 p-4">
+                  <span className="text-sm font-semibold text-[#e39860]">0{index + 1}</span>
+                  <div>
+                    <h3 className="text-sm font-semibold">{title}</h3>
+                    <p className="mt-1 text-sm leading-6 text-white/60">{description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="px-5 py-20 md:px-8 md:py-24">
+        <div className="mx-auto max-w-7xl">
+          <div className="max-w-xl">
+            <p className="eyebrow text-xs font-bold uppercase tracking-[0.22em]">Prinsip kerja</p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">Nilai yang kami pegang.</h2>
+          </div>
+          <div className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {values.map((value) => (
-              <motion.div
-                key={value.title}
-                className="p-8 rounded-xl bg-gradient-to-br from-slate-50 to-white border-2 border-slate-200 text-center card-hover dark:from-slate-800 dark:to-slate-700 dark:border-slate-700"
-                variants={itemVariants}
-              >
-                <div className="text-5xl mb-4">{value.icon}</div>
-                <h3 className="text-xl font-bold text-slate-900 mb-3 dark:text-white">{value.title}</h3>
-                <p className="text-gray-600 dark:text-gray-300">{value.desc}</p>
-              </motion.div>
+              <article key={value.number} className="surface-card rounded-2xl p-6">
+                <span className="eyebrow text-xs font-bold">{value.number}</span>
+                <h3 className="mt-7 text-xl font-semibold">{value.title}</h3>
+                <p className="text-muted mt-2 text-sm leading-6">{value.description}</p>
+              </article>
             ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Misi Detail Section */}
-      <section className="py-20 px-4 md:px-6 bg-slate-50 transition-colors duration-300 dark:bg-slate-800">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Komitmen Kami</h2>
-            <p className="text-gray-600 max-w-3xl mx-auto text-lg dark:text-gray-300">
-              Kami berkomitmen untuk terus berinovasi dan berkembang demi memberikan nilai terbaik kepada semua stakeholder
-            </p>
-          </motion.div>
-
-          <motion.div
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            {misiPoints.slice(0, 5).map((point) => (
-              <motion.div
-                key={point.title}
-                className="p-8 bg-white rounded-2xl border border-gray-200 shadow-md hover:shadow-lg transition-all duration-300 dark:bg-slate-700 dark:border-slate-600"
-                variants={itemVariants}
-              >
-                <div className="text-5xl mb-4">{point.icon}</div>
-                <h3 className="text-xl font-bold text-slate-900 mb-3 dark:text-white">{point.title}</h3>
-                <p className="text-gray-600 leading-relaxed dark:text-gray-300">{point.desc}</p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 px-4 md:px-6 bg-gradient-to-r from-cyan-600 to-blue-600">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-              Tertarik untuk Berkolaborasi?
-            </h2>
-            <p className="text-cyan-50 text-lg mb-8 max-w-2xl mx-auto">
-              Hubungi kami untuk mendiskusikan kebutuhan material konstruksi proyek Anda
-            </p>
-            <a
-              href="/kontak"
-              className="inline-block px-8 py-4 bg-white text-blue-600 font-bold rounded-lg hover:bg-gray-50 transition-all duration-300 shadow-lg hover:shadow-xl"
-            >
-              Hubungi Kami
-            </a>
-          </motion.div>
+          </div>
         </div>
       </section>
     </main>
